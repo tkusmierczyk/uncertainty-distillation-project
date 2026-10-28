@@ -1,0 +1,152 @@
+[00:00:09] [Speaker1]: So, I guess we'll only be talking with Anushtha today or is that the plan?
+[00:00:20] [Speaker2]: Sajit could be joining soon. He just joined but he left again. He'll join again soon.
+[00:00:27] [Speaker1]: Okay.
+[00:00:31] [Speaker2]: So Anushtha can you
+[00:00:34] [Speaker3]: Yeah. Hello sir. Yes sir sure. Uh sir so I no I have tried with the full run like my full run is still running maybe. So like for this basically there are two things. For the last Thursday I tried with a partial run where I taken the 900 samples for the teacher and 500 for the student and for this week I have tried with the full run for about 14,000 yeah 4732 for student and teacher. But that is currently on run so I'm expecting by five or six it will be over. So this is the partial run. One thing that I observed is there is an increment in the epistemic uncertainty. And but although I am looking for some of the papers where we can more increase the epistemic. There is not that much increment around 2% that's it. But here yeah. So this is the partial run itself not the full run.
+[00:02:12] [Speaker4]: Hello.
+[00:02:15] [Speaker1]: It was a bit too fast for me to be honest and like could we okay so we discussed last time that the data we ran on too little data right and then the results were not really reliable that was the problem right or
+[00:02:31] [Speaker3]: Yeah yeah that I ran on 1000 samples only and the second thing is epistemic uncertainty values are very low. So for the next Thursday it was like to increase my samples. So for that I did the partial increasing not the full run. Full run is for this week but it's learning right now. So with 900 teachers and 500 student models a student for training. So like I see an increment in the in every like uncertainty raw scores and aura score too. But what like in the epistemic uncertainty there is not that much increment. It is very less now too. So I was going through some of the papers but I didn't find any but yeah I'm working on it right now. To how to basically
+[00:03:27] [Speaker2]: I didn't understand. So I think the last time we discussed about increasing the samples and seeing if there is an improvement in epistemic uncertainty for the teacher model right?
+[00:03:38] [Speaker3]: Yes.
+[00:03:41] [Speaker2]: So is that what you're talking about?
+[00:03:42] [Speaker3]: So that is there but that is very slight. Yes. But that is very less sir. There is an increment that is very also less so I was
+[00:03:55] [Speaker2]: So the teacher model
+[00:03:56] [Speaker3]: Yes.
+[00:03:58] [Speaker2]: What is what are the sample sizes you have tried?
+[00:04:02] [Speaker3]: First teacher model is 9000.
+[00:04:06] [Speaker2]: What what?
+[00:04:07] [Speaker3]: 9000. So total all Samsung data set is around 16,369. And among them 14,732 can be trainable. There is already a train validation test plate in the data set itself.
+[00:04:23] [Speaker2]: I know that sample size. Like the number of forward passes like the number of forward samples.
+[00:04:30] [Speaker3]: Uh that is 12 this time. Last time I tried with eight this time I increased to 12.
+[00:04:38] [Speaker2]: Maybe you should try even more right?
+[00:04:42] [Speaker3]: Yeah 18 like this time for the full run I am going to with 18.
+[00:04:47] [Speaker2]: Um
+[00:04:48] [Speaker3]: 18 and all the training samples that is currently running. So let's see the result then.
+[00:04:57] [Speaker2]: Okay sure.
+[00:04:59] [Speaker3]: So like what I'm telling is yeah of course there is an increment in the epistemic but that is very less. And I was going to like finding some of the paper which focuses on how to increase but I didn't find like particularly on this. So that is still I'm exploring. Even the raw scores have increased for teacher to
+[00:05:45] [Speaker1]: So just a kind of what does it mean increase the sample size for the teacher like are we are fine tuning the teacher I guess on this training data that's the or
+[00:05:58] [Speaker3]: Yes I have fine tuned and like last time sir I told you that I have taken only 1000 samples.
+[00:06:05] [Speaker1]: Yeah yeah yeah I understand rather just remember like trying to think really what we do with this data so we do first fine tune on this data the teacher and then we use the same data to distill students right?
+[00:06:18] [Speaker3]: No no no no uh the student and teacher samples are different. So like what I so this 9000 teachers are different 9000 samples are different and this remaining 5000 where already teacher model are not trained on. So I have taken that for the student.
+[00:06:38] [Speaker1]: Student isolation.
+[00:06:41] [Speaker3]: Yes yes.
+[00:06:46] [Speaker1]: Okay so it's different data we do train teacher from the data we distill students that's the that's the idea right? Even though both come from the same data set.
+[00:07:02] [Speaker3]: Um um.
+[00:07:05] [Speaker1]: And then we have a separate test set that we evaluate on right?
+[00:07:09] [Speaker3]: Yes yeah that is present in the data itself 819 that's count is 819.
+[00:07:16] [Speaker1]: Okay. Um so can we take a look on this numbers and how they changed?
+[00:07:29] [Speaker3]: So like for the uncertainty this thing that we have observed in the previous result too that they are increasing. The total uncertainty is increasing with respect to all data sets. But one more thing that we observed last time is the raw scores for the Samsung and the dialogue sum are almost similar for the Softmax and Laplace. So
+[00:07:55] [Speaker1]: Uh again again like we did
+[00:07:57] [Speaker3]: or the raw score
+[00:07:59] [Speaker1]: Um
+[00:07:59] [Speaker3]: Okay we will get to it firstly this is the uncertainty so the thing that we observed last time is similar to is basically same. These uncertainty values for teacher as well as students are increasing with respect to all data sets like from in distribution to the OOD. And if I talk specifically about epistemic uncertainty so this is for the teacher. And this is how it get changed or increased a slight weight for all the data set.
+[00:08:37] [Speaker1]: Um so basically
+[00:08:38] [Speaker3]: So basically there is
+[00:08:39] [Speaker1]: increased for the teacher but it went down for a dish Laplace student.
+[00:08:45] [Speaker3]: Uh it went down for dish Laplace then Laplace is almost same and that Softmax and Laplace are almost same. It went down for the dish yes 0.06 oh.
+[00:09:06] [Speaker1]: Uh this is a second what's happening here exactly so uh the teacher totals uh it's 1.26 and then dish Laplace. Okay dish Laplace gives always higher values. And with the bigger data set even larger values. Even bigger difference we have in terms of absolute numbers right?
+[00:09:39] [Speaker3]: Yes this is totally the data shift that I understood. Data basically the data difference we can say.
+[00:09:52] [Speaker1]: Uh so sorry what what does it mean this data difference uh that's
+[00:09:56] [Speaker3]: Data means uh like if there is a shift in the data set from Samsung to dialogue sum and then shuffle or news.
+[00:10:07] [Speaker1]: Right yeah yeah but uh like if we look on the Samsung right so that's a training data set or in distribution. Still like uh dish Laplace get 1.47 and teacher got 1.26. And Laplace got 1.32. Um
+[00:10:30] [Speaker3]: Uh
+[00:10:31] [Speaker1]: So there is a like a consistent pattern that students always get higher values. I'm just wondering and yeah why? Uh and about the raw score uh like how is this? Okay so teacher is 37.56 dish Laplace is 36 and Laplace is 36.30 so it's basically we got lower quality in improved increased uncertainty. But isn't it just because we the teacher actually seen 9000 samples and students seen 5000 samples.
+[00:11:12] [Speaker3]: Um
+[00:11:14] [Speaker1]: Uh it's just
+[00:11:14] [Speaker3]: I think that that is the main cause I believe so.
+[00:11:18] [Speaker1]: So I mean if we
+[00:11:19] [Speaker3]: But that was partial answer that I was trying.
+[00:11:22] [Speaker1]: Right so if we assuming so like would the what do you think will happen so if we train teacher on 16,000 and distill students on the same 16,000 I guess would raw score match the teacher and uncertainty match the teacher from the other side so going down.
+[00:11:45] [Speaker3]: So for the raw score I believe there should be uh there will they will be less for the student model as compared to teacher. And also with respect to the data sets. Like if there is a domain the total a domain shift then the raw score should be less both for teacher and student.
+[00:12:07] [Speaker1]: Uh sorry.
+[00:12:10] [Speaker3]: So for the raw score
+[00:12:12] [Speaker1]: Um
+[00:12:13] [Speaker3]: what I believe is if there is a shift in the data set like as we have the news and shuffled one. Like take for take the example of news so there is a totally domain shift. So on that I believed the the raw score will be decreased as compared to the in distribution and then dialogue sum. And if you and if we take between teacher and student model. So I think like there will be not that much difference I guess. In their raw scores. Okay but so okay we do run this full full data sets runs and what does tell what will it tell us then or what will So it's it is still running.
+[00:13:31] [Speaker1]: Yeah yeah okay okay but what do we think it will get from it so what was the desired outcome?
+[00:13:39] [Speaker3]: What I'm believing is uh uncertainty values for students should be less as compared to the teacher. Oh sorry no it should be higher.
+[00:13:53] [Speaker1]: Well depends on in distribution data or level of distribution I guess in in distribution data they should match right?
+[00:14:00] [Speaker3]: Yes for in distribution they should match but for OOD they should uh like they will be high. That depicts the higher uncertainty in the data.
+[00:14:17] [Speaker1]: And then we add noise and then we want to them to increase and also epistemic uncertainty of the students to increase right?
+[00:14:27] [Speaker3]: Yes. Yeah one thing that I I have supposed that should be right for this run is uh there should be an good increment in the epistemic uh with respect to the data set as compared to Elliot Eric. Because the result that I shown from today and last six we are totally the uncertainty values are totally depending on the Elliot Eric one.
+[00:14:51] [Speaker1]: Right uh have you checked any literature regarding that?
+[00:14:55] [Speaker3]: Uh not the literature part maybe I read about somewhere but so that is what I'm expecting from this run but let's see the result then I I will be more sure I guess.
+[00:15:13] [Speaker1]: Um could you maybe search some literature on like why we get most of the uncertainty in the or like the the problems we observed with epistemic here. So maybe there is actually some there are some results like and explaining like what's happening overall. And what we should be expecting. So we also talked about I guess um maybe like because you do train um dish Laplace students right?
+[00:16:49] [Speaker3]: Yes distill
+[00:16:50] [Speaker1]: And then there is like this alpha zero parameter uh when you already trained this model right?
+[00:16:57] [Speaker3]: Uh
+[00:16:58] [Speaker1]: So if we try to manipulate this thing a bit like um uh so you want you you showed like on last time or previous time the learned precision alpha zero plot could you show this again maybe?
+[00:17:21] [Speaker3]: Uh sure sir just a second. That
+[00:17:41] [Speaker1]: Uh sorry.
+[00:17:42] [Speaker3]: Uh sorry this one sir.
+[00:17:46] [Speaker1]: Uh could you zoom in because I cannot really read what's there uh okay uh there is validation reading now okay uh okay yeah alpha zero so this is uh how the precision is being is learning here right? Um it's like I mean validation is changing but the training it's almost immediately fixed or go very slowly up uh yeah couldn't we maybe like try to uh scale this values and see really what happens in terms of uh uncertainty and particular epistemic uncertainty of this dish Laplace model. Uh just like because this this is basically telling us about the scales of the of the epistemic right like uh
+[00:19:27] [Speaker3]: Yes sir.
+[00:19:29] [Speaker1]: um yes I'm just wondering like what would happen if we like are these values that are learned really the best one or we just got stuck in some weird place and we just never move from there so like I'm just wondering if you already have a pre-trained model for example uh take these values and just uh like re-normalize in a sense uh by increasing or like reducing 10 times increasing 10 times and then checking really how uncertainty scores change.
+[00:20:02] [Speaker3]: Sure.
+[00:20:03] [Speaker1]: Could we do this um
+[00:20:05] [Speaker3]: Yeah sure sure.
+[00:20:06] [Speaker1]: Yeah and uh I'm just wondering for the Laplace students is there anything like parameter that would have uh control the uncertainty in similar way?
+[00:20:17] [Speaker3]: For Laplace uh there is a tau value.
+[00:20:22] [Speaker1]: Okay what is this tau value uh
+[00:20:25] [Speaker3]: Just a second yeah let me see if I have mentioned it now slide. Uh no no this is not present here I guess yeah in this slide.
+[00:20:57] [Speaker1]: Okay but maybe if we open the paper and just show like if we look on the equations.
+[00:21:06] [Speaker3]: Yeah sure uh it's like you want the Laplace formula and all thing that I'm using here.
+[00:21:26] [Speaker1]: Sorry yeah Laplace formula like for for for the paper from like the the basically the paper text and equations if you could zoom in.
+[00:21:36] [Speaker3]: Yeah just a second.
+[00:22:26] [Speaker1]: Uh for the dish Laplace student there is no early stopping right? It's just like you train until convergence.
+[00:22:33] [Speaker3]: Yes already convergence. I'm just trying to Oh sorry I sent a different paper I guess. This is the paper sir I sent in chat.
+[00:24:23] [Speaker1]: Um Asian low rank adaptation for large language models you know I don't think this one. Wait
+[00:24:35] [Speaker3]: Asian low rank adaptation sir recent one.
+[00:24:40] [Speaker1]: Uh Asian low rank low rank adaptation for large no wait this is it this one no. This is about Laplace Laura paper.
+[00:24:56] [Speaker3]: Uh in in section 3.2 there is Laplace approximation.
+[00:25:02] [Speaker1]: Yeah yeah but uh I mean we talk about Laplace this Laplace distribution distillation. Uh like your Laplace student right? Uh yes yes. Yeah that's done. Okay maybe not like spent more time on that is just if you could check the paper and think really if there is uh like if there is a kind of some kind of uh control parameter in the Laplace distribution as there is in the digital distribution which we could take a look into in with respect to regularizing it or uh like maybe setting it or fixing it or playing with it just to see really how this affects the epistemic uncertainty. Okay.
+[00:26:04] [Speaker3]: That's okay.
+[00:26:04] [Speaker1]: And uh yeah also try to look about for for this um
+[00:26:13] [Speaker3]: taking the uh the alpha values and normalizing it with plus or minus 10 and checking it on model how many different uncertainty.
+[00:26:21] [Speaker1]: Uh not minus plus time five times or 10 times less or 10 times larger because it's uh
+[00:26:28] [Speaker3]: Okay. Yes.
+[00:26:31] [Speaker1]: Okay um
+[00:26:40] [Speaker3]: Sure I will go through it sir. Of course.
+[00:27:05] [Speaker1]: Okay should we move to Sajit? Or
+
+[00:28:19] [Speaker1]: Hello?
+[00:28:22] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: Hello sir?
+[00:28:23] [Speaker1]: Yeah I'm just wondering like if we have
+[00:28:27] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: Hi sir.
+[00:28:28] [Speaker1]: Yeah hey hello. Okay.
+[00:28:32] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: Shall we start?
+[00:28:33] [Speaker1]: Yeah could you start by reminding us where we were last time because it's always a bit of time.
+[00:28:39] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: So basically last meeting what we decided was or what we planned that we should train a teacher model on the obviously in distribution and auxiliary noises or they using different loss functions where we can maybe use a regularizer for this for the loss term use it for loss function and then maybe hyper do the hyperparameter tuning for that regularizer to get them maybe better results. But our main question was how to basically generate an optimal optimal noise that will give us a better result.
+[00:29:12] [Speaker1]: Yeah.
+[00:29:14] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: So for that I was doing some literature survey how to generate this noise and I found one paper. Let me just share it on the chat. Yes sir. Yes yes I found this paper. What it is doing is
+[00:29:35] [Speaker1]: Training confidence calibrated classifiers for detection out of distribution samples from 2018 okay? This one.
+[00:29:45] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: Yes sir what it yes sir yes sir. What it is doing is it is basically using a GAN model which it uses to generate the samples that lie at the boundary regions of the in distribution data. And it blames or empirically shows that training the more date model on this auxiliary data which lies in the lower density regions of the boundary regions of the in distribution give us better results compared to the date out of distribution data that lies far away from the in distribution data. And for that it has used this GAN model to generate such samples. So I was wondering if we can also incorporate this idea in our ensemble method because they have not used this on ensemble method they have used this on a single model.
+[00:30:36] [Speaker1]: Uh okay so it's a GAN that that is
+[00:30:42] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: Yes sir they are using GAN model to generate these auxiliary samples which they create as OD samples.
+[00:30:51] [Speaker1]: Yeah okay I mean it makes sense I guess this is what we wanted right or we thinking we're thinking about like so basically try take this and just use this generator to create like noise or out of distribution samples for for our like methods right? That would be the idea.
+[00:31:12] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: So they have not used it in ensemble or distillation technique. So I was wondering if we could use this idea of GAN
+[00:31:19] [Speaker1]: Yeah yeah yeah yeah yeah.
+[00:31:21] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: to generate the auxiliary samples and use in our technique.
+[00:31:25] [Speaker1]: Yeah I guess that would make sense. Or it would be interesting to see really how it like because we have the our results using true out of distribution data we have our results using this
+[00:31:39] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: noise version as well yeah.
+[00:31:40] [Speaker1]: Yeah yeah okay so do they have code or like
+[00:31:48] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: I haven't checked yet if they have given the codes or not but what they are doing is they are jointly training this color fire and this GAN network like in iterations in first iteration like they will generate this sample and also jointly they will train the color so I was just thinking if we could use the same technique like jointly training the color as well as the GAN. Or we could beforehand generate this like train the ensemble model and then using that model we generate the noise auxiliary samples.
+[00:32:23] [Speaker1]: Yeah I guess the second one right? So we have our teacher pre-trained and we
+[00:32:27] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: Yes sir we have already teacher pre-trained model. So maybe we can use that to generate the noises this auxiliary data.
+[00:32:37] [Speaker1]: Yeah yeah that makes sense. But okay what I guess they have the you you need to kind of decide about on the generator network right?
+[00:32:50] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: Yes sir.
+[00:32:51] [Speaker1]: So how what do they use and what would we what we would use?
+[00:32:58] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: Sir I will have to look into that like how we can maybe generate this. I haven't yet looked into that. Yes sir the code is available on the so maybe we can use their code as well.
+[00:33:51] [Speaker1]: Just wondering like okay maybe then you can take a look into that and see really if this will work with our setup I mean
+[00:34:02] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: Yes sir.
+[00:34:05] [Speaker1]: Uh yeah I guess that's an interesting direction let's let's do this let's try this and let's see really how this generator can can works and what kind of when you have already samples like like first evaluated on the like teacher and like in terms of scores and then we can compare it against previous results. And then try to think really like and then we can move to distillation.
+[00:34:47] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: Oh yes sir.
+[00:34:57] [Speaker1]: Just wondering like because for the GANs you have like one classifier network right? And we have an ensemble and then the question is where should we use average for classification or should we try to use like basically individual learners individual classifiers as classifier like for the objective for the training. I'm just wondering like what is there any what will be the right way of doing it? Would you know that or
+[00:35:29] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: No sir.
+[00:35:30] [Speaker1]: Okay I will look into it. I'm just yeah it's I I don't know I simply don't know really like what's the right way of doing this so if you could also try to check if there is any kind of um like GAN GANs with ensembles I guess something like that.
+[00:35:55] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: Yes sir maybe I'll look into that and we'll see what will be the best way to do it.
+[00:35:59] [Speaker1]: Okay. Right. So is there anything else for today?
+[00:36:24] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: No sir.
+[00:36:25] [Speaker1]: Okay. Are we transcribing this meeting or is there
+[00:36:38] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: No I guess not.
+[00:36:42] [Speaker1]: Because it says something like if we did it would be nice to have like summaries of the meetings in the slack but okay it says unavailable unfortunately okay.
+[00:36:59] [Speaker6 (Speaker2?, Speaker3?, Speaker4?)]: I think it is transcribing. Sorry I I was traveling so I could not follow much things. So I am not sure if going towards the direction of GAN

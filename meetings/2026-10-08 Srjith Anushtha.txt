@@ -1,0 +1,32 @@
+[00:00:11] [Speaker1]: Hello sir.
+[00:00:14] [Speaker2]: Yeah, I can hear you at least yes.
+[00:00:39] [Speaker1]: Yeah, what I was experimenting with like this finding out the uncertainty estimation in LLM tasks. So there we from we found the two methods to calculate the entropy. First is using P R E X which is tokenized and A X P R which is sequence based. So now I believe my model is trained properly. So here are the uncertainty uncertainty scores. So starting with the yeah I Samsung is an in-distribution data set. Already the data set which have input as dialogue and output as a summary. Dialogue summary is similar to that but it has a daily conversation. So it's size is very less. Size in the sense the sequence sequence length is very less. Then shuffled one is just adding like jumbling some of the words in the Samsung data set. And here I experimented with one more new data set which is news. And in this they input as some small article and output is a human written one line summary. So here are some of the yeah here are results. But initially I have taken only 1000 samples just to see for the training. And there's for the O D there are 300 samples taken. That's for all of them. So like
+[00:02:10] [Speaker2]: Okay but again these are like student scores right? Or these are student scores after distillation right?
+[00:02:16] [Speaker1]: Sorry? Yes after distillation.
+[00:02:21] [Speaker2]: And do we have teacher scores as usually like as the same question all the times. So we can compare really what's happening during the distillation not only what is the final outcome.
+[00:02:35] [Speaker1]: Yeah I have just a second. Uh maybe can we move to our work? I have but I need to combine just that's it. But I need to find out where it is. Yes. Yes for the laplace. Yeah for laplace specifically it's very high. And laplace student model. Uh and it is performing well. But this time I have trained like I have the curve And this is for the initial and softmax only. But training training loss with respect to softmax and then initially the mean value alpha value which is high at the training time around above 11,000. And then converts to around yeah converts to around 11,000 which is high for 15,000 for training at training.
+[00:04:30] [Speaker3]: What is that for the those scores?
+[00:04:38] [Speaker1]: Third curve that value mean alpha. So that is a summation alpha initially. So while training it is increasing to 15,000 and after that it's converting to around 11,000. That summation alpha that we calculate in initially. I mean model is conversed properly and stabilized. So I believe no like while training the alpha value is supposed to increase. So there is a search of around 15,000 the top. So at that time it is increasing it is training basically. And after that it is converting to around 1100 11,000. Okay it is alpha value just summation of alpha. The fourth one is a softmax scale patients loss and fifth one is our initial. So initial is yeah it's decreasing. For laplace is not here. Laplace is not here. Yes I have but I need to combine soon. I have. Maybe after the meeting I can. After the meeting I can send not flash. So like are you telling the endowment standard distillation like just here Samsung yes yes yes. Laplace only shows good for the O D 2. But yeah I need to present it again. Yeah O D with respect to the no Samsung data set.
+[00:08:21] [Speaker2]: You mean I guess out of distribution scores are not really that much helpful if we don't see that in distribution performance because it can be just that the models are uncertain on everything. And then like out of distribution scores will improve but like for example Laplace is uncertain on everything. So it will be also uncertain and out of distribution the question is really does it harm in distribution data. Um so do we have this teacher numbers and this in distributions distillation numbers first check.
+[00:09:40] [Speaker1]: Yeah that I have sir. But I need a minute to merge it.
+[00:10:03] [Speaker2]: Uh should we meet again tomorrow for example?
+[00:10:10] [Speaker1]: Tomorrow.
+[00:10:11] [Speaker2]: All right okay. Yes just like we have so long uh breaks between this meetings that it seems that I'm always asking the same questions but somehow like not hearing the answers. Um Monday works for me I guess. Uh well uh around now would work like around whatever is now in India.
+[00:11:03] [Speaker3]: Yeah big blocks.
+[00:11:06] [Speaker2]: Sorry?
+[00:11:07] [Speaker3]: Yeah big blocks.
+[00:11:10] [Speaker2]: Okay uh so it's 3:30 now in India right? So should we meet just on Monday on three at that 3:30?
+[00:11:24] [Speaker1]: Yes.
+[00:11:24] [Speaker3]: Yes.
+[00:11:26] [Speaker2]: Okay I'll try to create a meeting then. Do I have okay I need to find links from today's meeting to be able to add people um No I got it. Do I have not sent it yet? Okay now uh Okay I'm not sure I used this other emails uh we from faculty which have numbers in them. So I'm not sure which one is which but
+[00:13:21] [Speaker3]: I think it one I think it one.
+[00:13:24] [Speaker2]: Sorry you did?
+[00:13:26] [Speaker3]: Yeah I did one and send the invitation.
+[00:13:29] [Speaker2]: Ah okay okay. So you did one. Okay but should I have received the invitation then? Sorry? So you said that you did one meeting or you did?
+[00:14:00] [Speaker3]: Yeah I I have sent the invitation.
+[00:14:04] [Speaker2]: You haven't or you have? Uh
+[00:14:08] [Speaker3]: I I haven't I haven't sent the invitation.
+[00:14:10] [Speaker2]: You you will send the invitation. Okay sorry I'm I'm a bit lost. But okay let's meet then on Monday at uh 3:30 right? And we can continue with this with this topic I guess then.
+[00:14:39] [Speaker1]: Yes yes.
+[00:14:41] [Speaker2]: Okay I I will have to I have to run unfortunately now so yeah. Uh see you on Monday then and thank you bye bye.
+[00:14:51] [Speaker1]: Yeah sure sure bye.

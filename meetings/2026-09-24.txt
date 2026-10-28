@@ -1,0 +1,333 @@
+[00:00:01] [Speaker1]: Sure, sure.
+[00:00:04] [Speaker2]: Okay. So, should we start with Sajit? Maybe first let's walk over what we discussed last week. So, from what I remember there were more like we discussed this E and D square to results. But there were some several questions regarding the what was shown. So, we we've seen that out of distribution adds improves distillation but noise didn't. But there was a question really how this out of distribution and noisy data behave in the teacher meaning total and knowledge uncertainty or entropy. And also whether like what's the what's the impact of the size. So, if we use the same size of the data with out of distribution data or with noisy data would this actually really help? I guess that were the question. Right?
+[00:01:31] [Speaker1]: Well, I brought the results.
+[00:01:34] [Speaker2]: Sorry?
+[00:01:36] [Speaker1]: Sir, I have got the results. Shall I share my screen to show them?
+[00:01:41] [Speaker2]: Okay, but do do do do we on are we on the same page about what we discussed last time?
+[00:01:48] [Speaker1]: Yes sir, yes sir. Okay. Okay, so I mean if we kind of Yes sir, these are the results that we got like using the equal size equal input size for all the like E and D D only or Yeah, these are the results that I got like the first column is when we use the E and D D only like we use in distribution data without using any out of distribution data at the same time or distillation time.
+[00:02:48] [Speaker2]: Wait, wait slowly, slowly. So, we have five columns, right? Okay, so the first one is E and D squared then then is E and D squared plus auxiliary data. And this is uh
+[00:03:03] [Speaker1]: This is the previous one right? I have used more data for this distillation second column as compared to the E and D square only.
+[00:03:09] [Speaker2]: Okay, and this compares to the fourth column where the data size is matched.
+[00:03:17] [Speaker1]: Yes sir, equal size data set in all three cases.
+[00:03:24] [Speaker2]: Okay, could so and in distribution data what was what and what was out of distribution data here it was C for 10
+[00:03:41] [Speaker1]: C for 10 is in distribution and C for 100 is out of distribution.
+[00:03:46] [Speaker2]: Okay. Now, so so basically adding how did you change the proportions or what are the proportions in the
+[00:04:02] [Speaker1]: It's equal sir, 50-50 ratio.
+[00:04:05] [Speaker2]: 50-50.
+[00:04:06] [Speaker1]: Yes sir.
+[00:04:11] [Speaker2]: And the original data sizes are what? Like how big is the
+[00:04:17] [Speaker1]: Sir, the data size is 50,000 sir.
+[00:04:20] [Speaker2]: Uh for C for 10.
+[00:04:23] [Speaker1]: Yes sir, for both C for 10 and C for 100 original training size is 50,000. Yes sir, for both it is 50,000.
+[00:04:29] [Speaker2]: Okay.
+[00:04:30] [Speaker1]: So, I'm trying to understand what is this experience about?
+[00:04:34] [Speaker2]: So, last week we we said that adding auxiliary data improved the results with this is what we've seen last week, right? But the my worry was that is it improving just because there is more training data for distillation and actually this is what is showing here. So, if we use the same amount of data in distillation meaning if if we keep the data size budget fixed and just use different data sets like in distribution along with out of distribution actually it makes it worse but say Uh I think it's distillation, right? So, Sajit could you explain?
+[00:05:28] [Speaker1]: Yes it is a distillation that we have been discussing in last two three
+[00:05:32] [Speaker3]: So, what is the experimental setup? What are these metrics computed on? On what data set these metrics are computed on? What is the experimental setup?
+[00:05:40] [Speaker1]: On yes for training data for in distribution we have used this training this C for 10 data set as ID data set.
+[00:05:51] [Speaker3]: See after all these training what are you doing? What are you trying to just
+[00:05:56] [Speaker1]: We are trying to just both the classification accuracy when we use the only in this in this distribution data or when we use both in distribution as well as actual out of distribution or when we use noise in the speed of this out of distribution. For all this case we are trying to detect
+[00:06:11] [Speaker3]: But this time what are you trying to compute?
+[00:06:14] [Speaker1]: This time as Thomas sir has mentioned last meeting that we should be using equal data set
+[00:06:20] [Speaker3]: Uh now what are you trying to do in this time? This time what are you trying to compute? How are these metrics computed?
+[00:06:32] [Speaker1]: First time I'm trying to compute this classification accuracy on the actual in for C for 10 test data set. This table field for that.
+[00:06:41] [Speaker3]: So, classification accuracy on C for 10.
+[00:06:44] [Speaker1]: C for 10 test data set, yes sir.
+[00:06:48] [Speaker3]: So, what is our expectation? To be expect the classification accuracy on C for 10.
+[00:06:54] [Speaker1]: To our main goal was this uncertainty basically it is table four actually sir. We were trying to see how it on this table for like out of values.
+[00:07:03] [Speaker3]: So, so the table three is only the classification accuracy on Yes sir, it is for classification accuracy on C for 10 test data set, yes sir.
+[00:07:11] [Speaker2]: Okay, sure. It is not like uh no that classification between some distribution and out of distribution.
+[00:07:19] [Speaker1]: Table four is basically when we use out of distribution like we have used LSUN test data set or in tiny ImageNet set in all these cases and we try to see how this order value is for each of these sets.
+[00:07:36] [Speaker3]: Now in let us go back to table three, okay? So, I understood it is just trying to find out the classification accuracy on in distribution data. Yes sir, in distribution right? Yes sir.
+[00:08:06] [Speaker1]: So, this is also like a teacher and student model. And the student is trained using distillation from teacher.
+[00:08:14] [Speaker3]: Yes sir.
+[00:08:16] [Speaker1]: Okay, and these accuracies are all the student accuracies.
+[00:08:21] [Speaker3]: Yes sir, these are all student accuracies. And do we have some teacher accuracies from there?
+[00:08:26] [Speaker1]: Yes sir, it is here I will see these results. Yes sir. First one is in second one is the teacher accuracy.
+[00:08:46] [Speaker3]: Uh okay, let's go back to that table three whatever you have.
+[00:09:04] [Speaker1]: Okay. Now you are just looking at how in distribution the accuracy like C for 10 accuracy have changed when you do this. Is it affecting the in distribution accuracy? That is what it is trying to understand.
+[00:09:18] [Speaker3]: Yes sir. So, I have I have I am wondering why E and D D plus A U S is indeed increasing the in distribution accuracy? Why would having an out of distribution data improve the in distribution accuracy?
+[00:09:58] [Speaker1]: Sir, here it is mainly because we are using more data in this in distribution plus auxiliary. If you see the fourth column where we are using the equal data set the E and D D is doing better improving better A A accuracy results. Sir, I am telling sir I am asking about for the second column and third column E N D D and E N D D plus A U X.
+[00:10:24] [Speaker3]: Yes sir.
+[00:10:25] [Speaker1]: Why should we expect that improvement?
+[00:10:30] [Speaker2]: My reason my I I I I can maybe try to guess something. So, my reasoning is here that uh both C for 10 and C for 100 are like image data. So, if we just used more image data for training image classifier we improve some kind of I don't know it's I we don't know really what the network is here but I am assuming it's some kind of CNN network then maybe we get better filters on the initial uh layers and or maybe we prevent a bit of over fitting of the training data just by using this out of distribution. So, we get the let's say layers or filters in the initial layers that are just more robust. That would be my guess. But yeah indeed the improvement is pretty large.
+[00:11:18] [Speaker1]: Yes yeah I think it's just that the first special learning capability has improved. Possibly just because we have large amount of data. If it is like out of distribution yes that's perhaps one reason we can explain this behavior.
+[00:11:40] [Speaker3]: So, now adding noise is just like uh what people uh do in a standard approach that people do during in uh computer vision, right? Which is augmenting the existing data set with more and more data. Data augmentation, right? Where we can sometimes people consider this protected variants of the given data etc. So, it it it this is this can be just seen as some data augmentation, right? But then uh when we have that noisy portion maybe does it is blossoming because of the noise is it? But I I was wondering why is this happening? E N D D A U S is improving the performance but E N D D plus A U S equal is worsening the performance. How can that happen?
+[00:12:51] [Speaker2]: Uh because we lowered the amount of the training in distribution training data. So, now we are under fitting the C for 10 data set because
+[00:12:59] [Speaker3]: But okay like out of distribution data we just lowered, right? Like generally when when the E N D D plus A U S the out of distribution the auxiliary data set is larger in size.
+[00:13:09] [Speaker1]: No sir, they are equal in size both.
+[00:13:13] [Speaker3]: Uh oh so E N D D and A U S both are equal in size in second column, is it?
+[00:13:19] [Speaker1]: Yes sir, like we have used both in distribution and out of distribution in same proportion.
+[00:13:25] [Speaker3]: So, so in third column what is the in distribution data size and out of auxiliary data size?
+[00:13:34] [Speaker1]: In third column in distribution data size is 50,000 and auxiliary data size is also 50,000. But in E N D D plus aux equal it is 25 and 25.
+[00:13:47] [Speaker3]: So, what is whatever trying to achieve with E N D D plus aux equal 25 25 whereas whereas E N D D plus aux it is 50 and 50, right? 50 and 50, yes sir. Then why you are calling E N D D plus aux as equal when third column has there is no equal field there?
+[00:14:07] [Speaker1]: Actually in last meeting we discussed that we should be using same input data size in all the three cases like E N D D and E N D D plus aux. That's why I used it like in simple E N D D we are using C for 10 only that is 50,000 data yes sample size only. But C for 10 aux we are using in total of 100,000 data data set input data.
+[00:14:30] [Speaker3]: Oh so what is in the third column? What types of in distribution data and auxiliary data size?
+[00:14:38] [Speaker1]: In distribution data size is 50,000 samples and auxiliary data size is also 50,000.
+[00:14:45] [Speaker3]: In third column.
+[00:14:46] [Speaker1]: Yes sir.
+[00:14:47] [Speaker3]: That means both are equal in size, right?
+[00:14:49] [Speaker1]: Yes sir.
+[00:14:50] [Speaker3]: Then what do you have a fifth column that you are expressly saying E N D D plus A U S equal?
+[00:14:56] [Speaker1]: No sir, this means this the total data size in fifth column is equal to the total in training data size in E N D D like second column only.
+[00:15:04] [Speaker2]: Yeah I think uh the the the what we are like why why we have this fifth and sixth column is because actually if you think about it like the third column the baseline is the the second column E N D D, right?
+[00:15:18] [Speaker1]: Yes sir.
+[00:15:19] [Speaker2]: And if we do second third column it's not really that much comparable because we used twice much compute budgets for getting these numbers because we used twice more data samples, right? So, even like okay we added some auxiliary data here and it's changed something but we actually also increased the data size the data set size. So, there are like two effects playing role and uh and then we don't know really what's the impact of this adding this auxiliary data set because it might be just impact of adding more data. And then the fifth and sixth column it's showing us really what happens if we keep the same compute budget meaning 50,000 of data samples and just change the adjust the uh the the what we are training on. And yeah I'm not sure if this this is that much interesting to look on the in distribution data because uh we reduced the in distribution training data size. Uh but now the question would be like whether this had any impact when doing distillation I guess which or like uncertainty quantification in the students.
+[00:16:38] [Speaker3]: That that
+[00:16:40] [Speaker1]: Basically yeah to compare with the same amount of data that we use for training in E N D D. That is what is equal there like okay.
+[00:16:47] [Speaker2]: Yes.
+[00:16:48] [Speaker1]: So, but I initially like last week I I I was yeah not able to follow pretty much many things but I was thought that when we were using E N D D plus A U R the auxiliary data sets was much higher than when in distribution data set. And I was expecting that you know the equal thing what we wanted to do this time should consider possibly the same amount of auxiliary data and in distribution data. But that was anyway the same, right? Okay.
+[00:17:22] [Speaker2]: Uh I'm not sure if I got you. Could you could you maybe try again repeat please?
+[00:17:27] [Speaker1]: Last week when our we were discussing my impression was that okay for auxiliary data we used much larger data size than the in distribution data.
+[00:17:41] [Speaker2]: Yes.
+[00:17:42] [Speaker1]: The in distribution data was maybe like 50,000 and auxiliary data sets was maybe 1 lakh something like that. That was my thought. And while we were considering in distribution plus noise the noise that we were using is same as in distribution data set and not same as the original auxiliary data that has been used. Uh that was my understanding from last week but uh I think yeah I I was not able to follow things properly. So, maybe my understanding was incorrect also.
+[00:18:17] [Speaker2]: Yeah I I think it's all the data sets here are 50,000. So, C for 10 is 50,000 and this is in distribution data. C for 100 from what I understand is also 50,000 uh which is out of distribution data and uh the noisy data is I guess noisy version of the C for 10. And this would mean also that would be my assumption that it's also 50,000. So, all the data sets are 50,000 from what I understand.
+[00:18:44] [Speaker1]: Sure. Yeah.
+[00:18:48] [Speaker2]: Yeah and uh this is
+[00:18:51] [Speaker1]: So, now the comparison that we have to make is with respect to E N D D. Right? E N D D the first second uh now second column is what we have to compare against.
+[00:19:04] [Speaker2]: Yeah yes yes that would be the baseline and actually it seems that if if we look on the table for now a bit more because it we see only top two. So,
+[00:19:13] [Speaker1]: Sure.
+[00:19:14] [Speaker2]: so this is uh maybe let's keep both on the the screen table three and table four because it tells us about the trade off. Um so it seems that um yeah of course when we replace the in distribution data a bit with the auxiliary or noisy data uh we get worse results in the performance of test on the test in distribution in distribution test data. But we get also better uh numbers on the at least when using this uh auxiliary data set we get better uh out of distribution numbers here. It seems so. Which is also well what we wanted I guess. Now there there is it seems that there is a trade off because if we uh have like kind of fixed budget meaning fixed number of samples then it's a question really what should be the um balance between the uh in distribution and auxiliary data set. Uh that's one question open question for now. But also it seems that the noisy data is total garbage here because it's not helping any anywhere. So, uh now the question is really like whether what we do with the like how we create the noisy data makes any sense because it doesn't seem so. It's a it's really like there there is a I mean if we if we are thinking about this uh using this noisy data we should really think way better how this noisy data should be created because this is what we have now it's not helpful helpfully in any way. Yeah so to sum up uh two things. One is the trade off between the in distribution data quality and the out of distribution detection and the second thing is really the quality of the noise data.
+[00:21:11] [Speaker3]: So, in table four we are computing okay we are trying to classify between in distribution and out of distribution, right? So, it is these results and we expect larger the better. And with A U R we are getting uh better results but it's not happening with noisy version of the data. Is is this any time correct? Yes sir. So, what was the difference between E N D D noise and E N D D noise equal? E N D D noise uh used 50,000 each is it?
+[00:21:56] [Speaker1]: Yes yes sir it's same as E N D D aux and E N D D aux equal.
+[00:22:00] [Speaker3]: So, I think even before these experiments uh you were asked to find out the entropy values.
+[00:22:08] [Speaker1]: Yes sir, I have completed those as well yes sir.
+[00:22:11] [Speaker3]: Huh sir. Okay yes sir.
+[00:22:20] [Speaker1]: These are the entropy values when they were tested on this teacher model.
+[00:22:39] [Speaker3]: So, this is trained on C for 10.
+[00:22:41] [Speaker1]: Yes sir. And what was the out of distribution data set? Here the out of distribution is C for 100. C for 100, yes sir.
+[00:23:06] [Speaker3]: So, noisy one has a higher uncertainty.
+[00:23:09] [Speaker1]: Yes sir that's the answer.
+[00:23:16] [Speaker3]: Entropy is higher for noisy, is it?
+[00:23:18] [Speaker1]: Yes sir same as out of values are also higher.
+[00:23:22] [Speaker3]: Sorry? If we see in in the bottom these out of values then we use this real O D and noisy I D. This noisy I D is doing higher out of values like 99. Here also it is doing better than this real O D.
+[00:23:40] [Speaker1]: Okay, so the noisy one is actually is a good out of distribution data set. But is it because is it too noisy?
+[00:23:58] [Speaker2]: Uh sorry so this is on the teacher. Uh could could I ask again for explanation of how this was computed all that here? And so
+[00:24:10] [Speaker1]: These are passed through this teacher model all these data sets to get these uncertainty values. All the data sets like first clean C for 10 test data set. They are passed through this teacher model to get these entropy values, total uncertainty and knowledge similarly for this out of
+[00:24:24] [Speaker2]: Okay.
+[00:24:26] [Speaker1]: and noisy as well. And these out of values for real O D data like out of distribution and noisy they are computed against the in distribution data set.
+[00:24:37] [Speaker2]: I see uh this is very weird here because yeah it's seems like noisy data is getting really high scores here but on the previous slide like on this table four it was not showing any improvement in right?
+[00:25:00] [Speaker1]: Yes yes yes. Yeah that doesn't make so yes sir that's what
+[00:25:09] [Speaker2]: It's a bit contradictory, isn't it?
+[00:25:12] [Speaker1]: Yes sir, quite contradictory.
+[00:25:26] [Speaker3]: So, did you try out with different noise levels or was it changing?
+[00:25:32] [Speaker1]: Yes sir I have trained in the previous week but they were not giving any better results than this noise that I have used here. So, so how are you actually in the code how are you providing this noisy version of the data?
+[00:25:58] [Speaker3]: And first creating this noisy data from the in distribution like applying this Gaussian noise. Then again I am doing this distillation like data set transform transfer to like for each sample getting this categorical from each of the teacher.
+[00:26:14] [Speaker1]: So, now in code where is the change that you are making, right? For instance, how is this code considering the auxiliary data? And how are you modifying it to consider the noisy data?
+[00:26:28] [Speaker3]: I am using two different codes for aux auxiliary and like I am using the same code but created two different copies. One for auxiliary data and the other for noise data.
+[00:26:40] [Speaker1]: And how are you what change did you make in the code to consider the noisy data?
+[00:26:46] [Speaker3]: I am not making any changes I just had to pass different data set here.
+[00:26:50] [Speaker1]: Okay, just you need to pass different data set, is it?
+[00:26:53] [Speaker3]: Yes.
+[00:26:53] [Speaker1]: And some argument they are taking the data set which has to be considered as auxiliary data.
+[00:27:01] [Speaker3]: Yes sir, yes sir. So, can you please show that?
+
+[00:28:29] [Speaker3]: Yes sir, these are the noises that I have tried.
+[00:28:46] [Speaker1]: So this is how creating noisy data right?
+[00:28:48] [Speaker3]: Yes sir, this is the signal that is creating this gaussian noise.
+[00:28:52] [Speaker1]: Ha so where are you pausing this?
+[00:29:41] [Speaker3]: So when we are doing distillation
+[00:29:43] [Speaker1]: Yes sir.
+[00:29:44] [Speaker3]: from any batch you have mix of noisy data and in distribution data or do you have like in a batch only one kind of data?
+[00:29:56] [Speaker1]: I use both of these data in distribution and this as well as this noisy data. First I do this data set transfer for all the data sets. And from that we get these different categorical like for in distribution as we have previously they will get these close vectors. And for out of distribution they get these diverse categorical so all of these are passed through this training model.
+[00:30:26] [Speaker3]: So even mini batch is it mix of in distribution and noise or mix of in distribution and auxiliary data?
+[00:30:32] [Speaker1]: Yes it is a mix.
+[00:30:39] [Speaker3]: Ha so can you show in the code where are you making the change of pausing the noisy data string? And also how do you know that in the mini batch we are considering mix of that?
+[00:30:58] [Speaker1]: I need to go through it again so give me a
+[00:31:47] [Speaker3]: Now just just now where where do you change the code to pause the noisy version of the data?
+[00:31:53] [Speaker1]: So I do this on terminal by changing these arguments at the at the terminal level.
+[00:31:57] [Speaker3]: What was where is that part of the code which considers those arguments?
+[00:32:03] [Speaker1]: That's in the created those bash files for them. Yes sir, this is the bash file here when I try to run this I change this okay. Yes sir, here is how I pause this you see this one. Can this one. If I pass here here then we will take the real out of distribution and if I pass noise as argument it will load this noisy data.
+[00:33:00] [Speaker3]: Okay right so so there is no error in passing the data and all right?
+[00:33:06] [Speaker1]: Yes sir.
+[00:33:21] [Speaker3]: Thomas can you just what could be going wrong?
+[00:33:29] [Speaker4 (Speaker2?)]: It's hard to say really what's happening here to be honest.
+[00:33:37] [Speaker1]: So out of distribution uncertainty seems good for like that is the what is we wanted for a noisy version right it's not like noise version is not showing any uncertainty. It is indeed showing that is from the topic calculation. Then one the performance is not similar to the you know auxiliary data.
+[00:34:07] [Speaker3]: Yes sir, I guess the best time out of data set that we are using are semantically similar to this actual like cyber handle we are using that's semantically similar to those images as well. Next time maybe it is showing higher order of end of higher OD of auto values for this when we train on this auxiliary data. So maybe noisy version of the distribution is even more similar right?
+[00:35:08] [Speaker4 (Speaker2?)]: Could we see again this entropy scores some the next page? Okay so so these are teacher results right?
+[00:35:40] [Speaker3]: Yes sir.
+[00:35:41] [Speaker4 (Speaker2?)]: The teacher scores and what about student scores? Do they like do we match when we do
+[00:35:52] [Speaker3]: So like when we test these OD and noisy data on student model that's what you are asking sir?
+[00:35:59] [Speaker4 (Speaker2?)]: Yes like what we we see out of distributions like this area under curve scores right but we don't see really this values here like this entropies.
+[00:36:14] [Speaker3]: I didn't compute it we didn't compute it both that in this leg. Uh sorry Thomas what did you say?
+[00:36:24] [Speaker4 (Speaker2?)]: Now because like we've seen these are these are scores for the teacher from what I understand right?
+[00:36:30] [Speaker3]: Yes sir, yes sir.
+[00:36:32] [Speaker4 (Speaker2?)]: So we have a very high level of uncertainty numbers for the teacher and lower numbers for out of distribution of of for the noisy data we have very high scores then we have a slightly lower for uh out of distribution and then we have the lowest uh for the in distribution data right? But this is teacher and I just wonder and the other table shows us the numbers for the students really and um could we could yeah we have only the first column that shows us the number for the teacher is it? Could you scroll up or could we put maybe these tables next to each other?
+[00:37:14] [Speaker3]: This one.
+[00:37:15] [Speaker4 (Speaker2?)]: The table four I think it's
+[00:37:18] [Speaker3]: Taking all these this.
+[00:37:25] [Speaker4 (Speaker2?)]: Now so these are all just students right? So we don't really we cannot really compare these numbers because these are for teacher the others are for students.
+[00:37:33] [Speaker1]: Yes sir. Yeah but this is mainly to see if our noisy version is indeed showing a OD layer yes sir.
+[00:37:46] [Speaker4 (Speaker2?)]: Yeah it seems that it's showing strongly in the teacher but uh like I don't know really what's happening what when we are training on students. Can we maybe maybe we should take a look on really entropies also in the students to see
+[00:38:00] [Speaker3]: Yes sir, I can do that.
+[00:38:03] [Speaker4 (Speaker2?)]: But otherwise I really don't know what's happening here because I mean these numbers are super high right? Like this would suggest that noisy data should work really strong as a very strong out of distribution data whereas the numbers in the students really doesn't don't show any actually they they do show that then the noisy data is just like not doing anything reasonable. Um we just I don't know really it's confusing.
+[00:38:40] [Speaker1]: Maybe maybe we need to possibly do something and the distillation time also giving maybe something like more important to distribution distribution of in distribution data and just what
+[00:38:55] [Speaker4 (Speaker2?)]: That would be the because at this moment we gave the probability of the in distribution and this noisy data 50 50 like 50 percent chance right?
+[00:39:05] [Speaker3]: Yes sir, very different values.
+[00:39:07] [Speaker4 (Speaker2?)]: And we don't really know what's happening if we do do like 75 percent or three like 75 percent of the data set would be the in distribution 25 would be out of distribution data or maybe 80 or 90 to 10.
+[00:39:22] [Speaker3]: Yes.
+[00:39:22] [Speaker1]: Yes.
+[00:39:23] [Speaker3]: Those things I can train it.
+[00:39:25] [Speaker1]: Yeah so so yeah some some some of those kind of now changing the uh
+[00:39:32] [Speaker3]: configurations.
+[00:39:33] [Speaker1]: Calculate distribution so of in distribution and out of distribution of the noisy version could improving the distillation to the student. But doing the should also hold when we use auxiliary data right? Let's before 100 but is it I don't know like before 100 is a images are not noisy and consequently it is not affecting I don't know uh
+[00:40:15] [Speaker4 (Speaker2?)]: Maybe we could try also different way of noisy data instead of like just adding gaussian noise. Could we also
+[00:40:25] [Speaker3]: Can try different prices like that is not all but they are not giving any better results.
+[00:40:30] [Speaker4 (Speaker2?)]: Sorry what kind of noises have you tried?
+[00:40:33] [Speaker3]: Gaussian and sergeant pepper as well.
+[00:40:37] [Speaker4 (Speaker2?)]: Could you maybe just try like structural noise so let's say you cut the image into grid. Let's say four times four right?
+[00:40:48] [Speaker3]: Yes sir.
+[00:40:48] [Speaker4 (Speaker2?)]: And then randomly uh select for each of the like elements of this tiles. Just randomly shuffle it so move it to some or just select the positions in random so
+[00:41:03] [Speaker3]: Okay.
+[00:41:04] [Speaker4 (Speaker2?)]: that's like very because this is adding noise to pixels is slightly different thing than adding noise in the structure of the image right?
+[00:41:14] [Speaker3]: Yes sir.
+[00:41:16] [Speaker4 (Speaker2?)]: Okay but you said that you tried salt and pepper and some other like I don't know what kind of noise but
+[00:41:21] [Speaker3]: Gaussian noise.
+[00:41:23] [Speaker4 (Speaker2?)]: Okay what was the outcome there?
+[00:41:26] [Speaker3]: There giving worse result than this one the this gaussian noise.
+[00:41:33] [Speaker4 (Speaker2?)]: Worse in what sense?
+[00:41:36] [Speaker3]: Like not giving any better accuracy and also giving less auto values.
+[00:41:44] [Speaker4 (Speaker2?)]: Less what values out of distribution or
+[00:41:48] [Speaker3]: Yes sir, out of distribution data.
+[00:41:57] [Speaker4 (Speaker2?)]: Okay um
+[00:41:59] [Speaker1]: Sorry what did you say? Sajjad can you repeat what you said?
+[00:42:07] [Speaker3]: I think Thomas sir was asking me to try different noises and I had already tried few noises and he's suggesting using some other noise like that maybe change the structure of the image and I'll do that I'll do that this week.
+[00:42:19] [Speaker1]: Okay so can you also share the excel sheet of all those different noises that you have tried?
+[00:42:25] [Speaker3]: I need the excel sheet but I have json files. I can create an excel sheet and share with us from those json files.
+[00:42:36] [Speaker4 (Speaker2?)]: Okay so to sum up we would like to yeah.
+[00:42:39] [Speaker3]: After that in next sir.
+[00:42:42] [Speaker1]: Ha sure.
+[00:42:47] [Speaker4 (Speaker2?)]: Uh so maybe to sum up what we like agreed today so to remember uh like we would like to see the entropy scores for the students right not only the out of distribution scores so we are we are we kind of could really compare what's being transferred from the teacher to the students right that's one thing. Then we would could we see like or we would like to see different proportions between uh in distribution and out of distribution slash noisy data to see really what's happening when we increase the one and reduce the other whether this behaves us uh like in a reasonable way. And also see the numbers for other types of noises including the something that is non-pixel level but also structural level okay?
+[00:43:44] [Speaker1]: Sure sir.
+[00:43:45] [Speaker4 (Speaker2?)]: I guess Sajjad would you agree with that or would you add something more or?
+[00:43:49] [Speaker1]: Yeah so actually this yeah at some point we may have to do this distillation experiments but by trying out the different sizes of the noisy version of the data and how this affecting the performance. As we keep adding 10 percent to it of the noisy data 20 percent 30 percent and keep okay that how is the performance is changing. And also in the direction of adding the noise uh how is the performance changing when you add like 5 percent noise 10 percent noise 15 percent noise etc.
+[00:44:52] [Speaker4 (Speaker2?)]: Okay um the question is whether should we start with Anushka like or should we just settle set at a different meeting because only 10 minutes left and it would be a bit unfair.
+[00:45:04] [Speaker5 (Speaker2?)]: Sure. Sure sir, let me share my screen.
+[00:45:11] [Speaker4 (Speaker2?)]: No no is it the question whether we can manage to do anything in 10 minutes or?
+[00:45:17] [Speaker5 (Speaker2?)]: Uh it's like sir it's that inversion problem that we have in the last result that is now fixed. And also you told me to have before training and after training result so that is also fixed but there is an issue that I thought that I observed this that dialogue some data set that we are taking for OD. I think it is not working fine right now with our Samsung data set. So I am planning to change it with some different data and again right now the result that I have is using the exponential function for calculating the alpha and not judiciously instead of soft mix. So the soft mix function with the some regularization it's currently running. So maybe it's good if I showed that result after the running. So that's the update from
+[00:46:11] [Speaker1]: So as I as I recollect uh we remember that for uh for definitely Laplace
+[00:46:20] [Speaker5 (Speaker2?)]: Um.
+[00:46:20] [Speaker1]: entropy on in distribution was higher.
+[00:46:24] [Speaker5 (Speaker2?)]: Yes.
+[00:46:25] [Speaker1]: It was assumed that okay the learning has not happened properly for in distribution.
+[00:46:32] [Speaker5 (Speaker2?)]: Yes.
+[00:46:32] [Speaker1]: Simply the results are not good.
+[00:46:34] [Speaker5 (Speaker2?)]: Yes yes. So that thing is not fixed. So like I can clearly mention the before training and after training entropy change that I can present it.
+[00:46:49] [Speaker1]: But the issue is for calculating the alpha I have used
+[00:46:52] [Speaker4 (Speaker2?)]: Do you do you do you have loss curve loss curve?
+[00:46:56] [Speaker5 (Speaker2?)]: No no not really.
+[00:46:57] [Speaker1]: Loss of in distribution our
+[00:46:58] [Speaker5 (Speaker2?)]: No sir, right now I don't have.
+[00:47:02] [Speaker1]: Okay so we may need to look at data as well how is taking in this uh Laplace case and case.
+[00:47:13] [Speaker5 (Speaker2?)]: Yes yes and that too Laplace is still running so only I have for soft max and
+[00:47:20] [Speaker1]: So so that's everything is do you have the loss curve for soft max?
+[00:47:24] [Speaker5 (Speaker2?)]: No not the curve any so right now no plot I have done.
+[00:47:29] [Speaker1]: Soft max like initial
+[00:47:32] [Speaker5 (Speaker2?)]: And before and after training result let me share my screen quickly. This is for the in distribution data. But yeah the reason that we are getting very less
+[00:48:01] [Speaker1]: What what what entropy is increasing?
+[00:48:04] [Speaker5 (Speaker2?)]: Ha entropy is increasing.
+[00:48:08] [Speaker1]: Before training and after training.
+[00:48:10] [Speaker5 (Speaker2?)]: Um. Teacher model uh sorry in distribution data yes. On in distribution data. This is from in distribution data right?
+[00:48:28] [Speaker1]: Yes yes. Samsung. Maybe any any any means some it can increase.
+[00:49:00] [Speaker5 (Speaker2?)]: It should not increase means
+[00:49:03] [Speaker1]: Sorry?
+[00:49:05] [Speaker5 (Speaker2?)]: Yeah.
+[00:49:09] [Speaker1]: It should it should be increasing right?
+[00:49:13] [Speaker3]: It should be increasing is it?
+[00:49:16] [Speaker5 (Speaker2?)]: I mean I am asking you.
+[00:49:18] [Speaker1]: What do you think?
+[00:49:23] [Speaker5 (Speaker2?)]: Uh for training in the destination. But can you it should not.
+[00:49:42] [Speaker1]: After training we know exactly how to predict that we should be having less uncertainty right?
+[00:49:51] [Speaker5 (Speaker2?)]: Yes. I think this should be increasing but not like uh not that much is a difference.
+[00:50:15] [Speaker1]: So generally forget about all this generally for classification what do you think?
+[00:50:21] [Speaker5 (Speaker2?)]: Uh for calculating the entropy classification class.
+[00:50:25] [Speaker1]: Yeah.
+[00:50:28] [Speaker4 (Speaker2?)]: Do you expect the entropy keep increasing after training?
+[00:50:37] [Speaker5 (Speaker2?)]: Wow.
+[00:50:39] [Speaker1]: From in distribution data set.
+[00:50:45] [Speaker5 (Speaker2?)]: No no sir it should not I guess. No it should not be increasing. If it is increasing then chances of more uncertain kind of thing. Yes sir, it should not be increasing I guess. Um. Then how is it possible to hear?
+[00:51:18] [Speaker1]: Uh how is it possible to hear?
+[00:51:21] [Speaker5 (Speaker2?)]: I don't know. Uh it should not increase yes that will make the model more uncertain and less confident. Uh huh. So I need to see oh my god. How is happening?
+[00:51:38] [Speaker1]: So that that is you should also plot the loss function what is happening with the loss function. Uh yeah no that loss function that you are computing which you are trying to optimize.
+[00:51:51] [Speaker5 (Speaker2?)]: Um huh.
+[00:51:53] [Speaker1]: How is it changing our iteration is this how many iterations?
+[00:51:57] [Speaker5 (Speaker2?)]: This is for around three sir not that much.
+[00:52:03] [Speaker1]: Three iteration or three epochs?
+[00:52:06] [Speaker5 (Speaker2?)]: Three epochs only.
+[00:52:08] [Speaker1]: Okay okay.
+[00:52:09] [Speaker5 (Speaker2?)]: Um three epochs only.
+[00:52:11] [Speaker1]: Iterations in each epoch.
+[00:52:14] [Speaker5 (Speaker2?)]: Iteration is
+[00:52:16] [Speaker4 (Speaker2?)]: Okay I have a guess. Are are we sure that we didn't add teachers uh weights into the training in the yeah basically are we not modifying teacher anyhow?
+[00:52:37] [Speaker5 (Speaker2?)]: No like because are you asking in modification of
+[00:52:42] [Speaker4 (Speaker2?)]: Yeah I am just wondering like this this thing like something is changing it seems. It can and it's if it was just like a random going up down I would say it's just uh
+
+[00:52:56] [Speaker4 (Speaker2?)]: stochasticity but if it's actually systematically changing then we are changing something and I mean okay we may be measuring something wrong but we also may be changing something that we didn't want or we shouldn't have changed.
+[00:53:15] [Speaker5 (Speaker2?)]: Yeah, I believe that one alpha thing may be but yeah let's see.
+[00:53:24] [Speaker1]: Other possibility is that the evaluation metric that we have implemented is not correctly done. There's some negative missing somewhere or something like that sort.
+[00:53:35] [Speaker5 (Speaker2?)]: Oh no, that is correct sir that I have verified twice.
+[00:53:40] [Speaker1]: Okay.
+[00:53:42] [Speaker5 (Speaker2?)]: But it should not be increasing at all. I will look into it sir and I will post it in the by Saturday maybe then let me know and then I will again run it.
+[00:53:54] [Speaker1]: Sure, sure.
+[00:53:55] [Speaker5 (Speaker2?)]: That will be more good.
+[00:53:57] [Speaker1]: So you can get the you know the curve also the
+[00:54:01] [Speaker5 (Speaker2?)]: Uh ha sure, sure.
+[00:54:04] [Speaker1]: Those curves those curves.
+[00:54:11] [Speaker5 (Speaker2?)]: But here the epistemic is good for the oracle sum instead of the total like uncertainty entropy values.
+[00:54:29] [Speaker4 (Speaker2?)]: Could I could I ask for an explanation what we see here or what is on this slide on this in this table?
+[00:54:37] [Speaker5 (Speaker2?)]: So this is just the entropy's value with respect to dialogue sum and shuffled dataset a shuffled Samsung dataset and like in the earlier result for a dialogue sum epistemic we are not getting no, no these are the oracle so. Uh these are the uncertainty sir sorry that was the oracle entropy values. Okay, here the results are also not good. Like it's 0.004 for the epistemic.
+[00:55:20] [Speaker1]: And also for in distribution method?
+[00:55:22] [Speaker5 (Speaker2?)]: In distribution as well as OOD and shuffled one.
+[00:55:28] [Speaker1]: Wait what is OOD? OOD is dialogue sum.
+[00:55:31] [Speaker5 (Speaker2?)]: Uh OOD is dialogue sum shuffled is Samsung.
+[00:55:38] [Speaker1]: Samsung okay.
+[00:55:40] [Speaker4 (Speaker2?)]: These are students.
+[00:55:43] [Speaker5 (Speaker2?)]: These are the students.
+[00:55:44] [Speaker4 (Speaker2?)]: And if we put it next to the teacher
+[00:55:50] [Speaker5 (Speaker2?)]: Sir here
+[00:55:51] [Speaker4 (Speaker2?)]: Uh could we put this table next to the teacher uh scores?
+[00:55:56] [Speaker5 (Speaker2?)]: Teacher scores. But yes for teacher it's 0.4 4 kind of thing.
+[00:56:14] [Speaker1]: Now do you have the table for teacher?
+[00:56:17] [Speaker5 (Speaker2?)]: No, no it's in this format. I have to convert it to the paper uh table. Uh I will fix it sir I will fix it.
+[00:56:29] [Speaker1]: Yeah basically for teacher
+[00:56:30] [Speaker5 (Speaker2?)]: Uh
+[00:56:31] [Speaker1]: the entropy that you have converted is it same for in distribution and dialogue sum or it is different?
+[00:56:38] [Speaker5 (Speaker2?)]: It is different uh sorry it is same for in distribution and dialogue sum.
+[00:56:43] [Speaker1]: But it is higher for shuffled it.
+[00:56:45] [Speaker5 (Speaker2?)]: Right yes.
+[00:56:47] [Speaker1]: For the teacher also.
+[00:56:48] [Speaker5 (Speaker2?)]: Um I will go through it sir.
+[00:57:06] [Speaker1]: Yeah maybe we can also get this. What is the metric that people use here in this context?
+[00:57:13] [Speaker5 (Speaker2?)]: The raw score.
+[00:57:15] [Speaker1]: Raw score right?
+[00:57:16] [Speaker5 (Speaker2?)]: Yes.
+[00:57:18] [Speaker1]: Uh do you have the raw score also?
+[00:57:21] [Speaker5 (Speaker2?)]: Uh I have.
+[00:57:26] [Speaker1]: Then it is the same for in distribution and dialogue sum.
+[00:57:29] [Speaker5 (Speaker2?)]: No, no that's not different. These are the entropy Sir that I have just a second. I can verify. Should we maybe set up a second meeting let's say on Monday?
+[00:59:06] [Speaker1]: Monday?
+[00:59:08] [Speaker4 (Speaker2?)]: Yeah just like so we
+[00:59:12] [Speaker1]: Uh I I I think Monday would be difficult shall shall we just Kobe next week the same time when Thursday?
+[00:59:23] [Speaker4 (Speaker2?)]: Yeah we can we can also to speak on Tuesday Thursday as I was just thinking maybe we can
+[00:59:28] [Speaker1]: Yeah I think I will be traveling on Tuesday Monday Wednesday.
+[00:59:32] [Speaker4 (Speaker2?)]: Uh okay, okay, okay yeah sure that's just just fine so let's so maybe next Thursday but let that the next week let's start with Anushka so
+[00:59:41] [Speaker1]: Uh
+[00:59:41] [Speaker4 (Speaker2?)]: Sure, sure yeah do you want to start with Anushka first?
+[00:59:45] [Speaker5 (Speaker2?)]: Yes, yes, yes Anushka.
+[00:59:48] [Speaker4 (Speaker2?)]: Yeah.
+[00:59:49] [Speaker5 (Speaker2?)]: Sir right now I can show the score for deletion only. So I need to combine from the docs.
+[01:00:00] [Speaker4 (Speaker2?)]: So so maybe But yeah we can't compare with the other student model here. So maybe for the next meeting you could just prepare a kind of like a complete picture of the results where you're
+[01:00:35] [Speaker5 (Speaker2?)]: Yes. Yeah I just did didn't I don't include this one because usually our discussion goes towards that OOD and uncertainty so I thought that this time I skip this but I have another result of course I need to convert it to the table format that's it.
+[01:00:53] [Speaker4 (Speaker2?)]: Yeah so also like students and teachers on the same kind of slide so we could compare them next to each other and uh
+[01:01:00] [Speaker5 (Speaker2?)]: Yes. Sure sir.
+[01:01:04] [Speaker4 (Speaker2?)]: And uh
+[01:01:05] [Speaker5 (Speaker2?)]: Yeah on next meeting I will keep that in mind.
+[01:01:07] [Speaker4 (Speaker2?)]: Yeah and start with a reminder really what what what what was exactly done and how the things were implemented okay?
+[01:01:13] [Speaker5 (Speaker2?)]: Yes. Yes sir sure.
+[01:01:22] [Speaker4 (Speaker2?)]: Yes so so maybe we can start next week with that and then go into the details and try to
+[01:01:27] [Speaker5 (Speaker2?)]: Sure, sure. Yeah sure sir.
+[01:01:32] [Speaker1]: Yes we can do that. Okay sure. Yeah thanks thank you all.
+[01:01:39] [Speaker4 (Speaker2?)]: Thank you.
+[01:01:39] [Speaker5 (Speaker2?)]: Thank you.
+[01:01:40] [Speaker1]: You have today sure. See you all bye.
+[01:01:43] [Speaker4 (Speaker2?)]: Bye bye thank you.

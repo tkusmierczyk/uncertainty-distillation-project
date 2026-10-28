@@ -1,0 +1,154 @@
+[00:00:32] [Speaker1]: Yes.
+[00:00:34] [Speaker2]: Oh yes these are the results and like first second column is this E and D square where we had trained the model on student model on the in distribution data only. And then I have tried different noises and different proportions of noises here like if we see Gaussian noise with sigma 0.5 I have here I have take mentioned the proportion where 95% is in distribution data and 5% is the auxiliary data. Similarly for other noise types and well and actual out of distribution data that if a 10 that I have used it.
+[00:01:06] [Speaker1]: Okay but this is these are students right?
+[00:01:09] [Speaker2]: Yes sir these are students yes.
+[00:01:11] [Speaker1]: And um this proportion is used when during distillation. And training of the teacher or or is it just the same?
+[00:01:28] [Speaker2]: I have distilled like I have created this transfer set for the whole noisy version like or but during the training I have taken 95% of the data from the student from the in distribution data and 5% from the out of distribution all of these are distilled data sets.
+[00:01:49] [Speaker1]: Okay with just just a reminder what is the what is teacher trained or fine tuned on? It's
+[00:01:57] [Speaker2]: Teacher is trained on the C410 data set yes.
+[00:01:59] [Speaker1]: Okay so we have a teacher that is trained on C410.
+[00:02:03] [Speaker2]: Yes sir.
+[00:02:03] [Speaker1]: And then we use different proportions of C410 and some noisy.
+[00:02:10] [Speaker2]: Noisy version yes sir.
+[00:02:11] [Speaker1]: Okay this is Gaussian noise salt and pepper shuffling patches. And this is the proportion between the in distribution and noise yes.
+[00:02:26] [Speaker2]: Yes sir.
+[00:02:27] [Speaker1]: Okay but we don't have a proportion for like using C4100. We have just Okay.
+[00:02:37] [Speaker2]: I have tried all of them on different proportions but in this table I have mentioned the one that gave better results compared to others. In the other tables I have the comparison between these like we should see the salt and pepper. I have comparison for different ratios.
+[00:02:51] [Speaker1]: Yeah yeah I understand that it's just I'm asking about the because we have for different we have proportions for different types of noises but we don't have a proportions for using C4100 right as out of distribution or auxiliary data right? We have just 5050 there. But
+[00:03:07] [Speaker2]: No I have used it other proportions as well.
+[00:03:10] [Speaker1]: Okay.
+[00:03:12] [Speaker2]: But here I mentioned the one that gave better results as compared to other proportions.
+[00:03:17] [Speaker1]: Sorry it's this one is best or
+[00:03:21] [Speaker2]: This one is best among all the proportions that I tried.
+[00:03:23] [Speaker1]: But best all the dimensions meaning accuracy and EC or
+[00:03:30] [Speaker2]: No in terms of this out of distribution detection I have kept.
+[00:03:34] [Speaker1]: Okay but So I have still trying to understand all this. So is force distillation based like training the student model.
+[00:03:50] [Speaker2]: Yes sir.
+[00:03:51] [Speaker1]: The in distribution and out of distribution.
+[00:03:54] [Speaker2]: Yes sir.
+[00:03:56] [Speaker1]: When you say 7030 and 955 is the in distribution number of samples always the same?
+[00:04:05] [Speaker2]: For 95 yes sir in distribution for like total number of samples is 50,000 I have fixed it like if 95% I'm taking
+[00:04:12] [Speaker1]: No no no in distribution data samples is it remain the same?
+[00:04:17] [Speaker2]: No it varies based on the proportion.
+[00:04:19] [Speaker1]: Ah so in my understanding the in distribution has to remain the same and you keep varying the out of distribution.
+[00:04:27] [Speaker2]: But sir Thomas sir had asked me to keep the total number of samples same overall so if I change the out of distribution I have to change the in distribution accordingly as well.
+[00:04:37] [Speaker1]: Okay if you want to keep the total number of samples same is you need to keep changing it.
+[00:04:42] [Speaker2]: But then the in distribution then then it will be adversely affecting the ability to learn right?
+[00:04:52] [Speaker1]: So the in distribution data I see okay the out of distribution data is we are mainly using for uncertainty modeling capability to filter some uncertainty modeling capability into the student model.
+[00:05:10] [Speaker2]: Yes sir.
+[00:05:10] [Speaker1]: While without affecting that in distribution accuracy. So I think a better experimental setup would be by keeping like the in distribution data the same while varying the out of distribution data which of the results in the total number of data points to be different for different setups. So Thomas what do you think about it? But isn't it then the problem that like can we can we say that in distribution data is kind of like the best we can do in the distillation meaning that if we have this number of in distribution samples right? This is the best we can we can do with this with with this data set and this architecture or maybe actually if we had more data then we performed a better better kind of distillation right? So we could get even better accuracy or EC so I'm I'm not sure really what's the gap at this moment between the teacher and students. And this would actually tell me really what's the right approach here. It's like because I mean I understand like like you're not using the full not full in distribution data it does harm kind of accuracy of the students I guess. But then I'm not sure really yeah.
+[00:07:05] [Speaker2]: Even though that could be the case these numbers show it is not hurting the accuracy that much right? And if we can get a better uncertainty modeling capability by trading of light no accuracy then this approach also could be good right?
+[00:07:28] [Speaker1]: Thing is that actually we should we we are never comparing students to teachers and we don't really know how good is the transfer how good is the like okay.
+[00:07:40] [Speaker2]: I have teacher results as well maybe I can show them.
+[00:07:42] [Speaker1]: Yeah but we need to them sent to see them next to the students results right not just separately.
+[00:07:57] [Speaker2]: Yes sir this is the table three ensemble one is a teacher model and third column E and D square is a student data I have transferred.
+[00:08:06] [Speaker1]: Okay so actually
+[00:08:34] [Speaker2]: In this just using in distribution data alone right? E and D square is just using in distribution data alone. Yes sir yes sir yes you're right.
+[00:08:52] [Speaker1]: So what do we see here is that we are not perfect when training underneath distribution data right? So we never match the teachers performance. And especially in ECE. And in yeah so basically calibration doesn't trans transfer and but when we do aux we use auxiliary data okay we do improve ECE and calibration okay that's that's what we see but it doesn't work really where we if we used the noise instead of the auxiliary data set okay. Yeah and then from that the question was really if the improvement we see for because for E and D squared plus auxiliary right? It's shows improvement in compared to E and D squared and compared to E and D right? Yeah and then like the question was really whether the improvement comes because of the auxiliary information information from the auxiliary data or just from using the larger data set right?
+[00:10:19] [Speaker2]: Yes sir.
+[00:10:20] [Speaker1]: And then now like if we look on this number and then if we look on this proportions you did can we compare this column four to the situation where we actually like column one so as a baseline column sorry not column within sample as a baseline columned with auxiliary as like result read from using auxiliary. But then also to the situation where we don't increase the data sets so we are sure or we can confirm that the improvement in the quality is not because we just used more data. So I think last last week we checked this for 5050 right?
+[00:11:07] [Speaker2]: Yes sir Ah yes sir.
+[00:11:13] [Speaker1]: So this was this. Yeah so actually if we use 5050 it's we don't like we we lose much compared to just like increasing the data size okay but then if we do different proportion how does this look like? But this is just this is for noise not auxiliary right?
+[00:11:52] [Speaker2]: Okay for auxiliary Ah this one is a table sir.
+[00:11:59] [Speaker1]: Okay so basically if we do yeah so what we see here if we operate within the same budgets of train like distillation data set okay this is basically what happens there so more about accuracy I guess it's kind of expected. So more training data we use from the in distribution better accuracy we get. And about calibration actually is kind of also expected so more out of the distribution data we use better better EC we get right? So so within a co-fixed budget we observe that EC like there is a trade of between accuracy and EC okay. And actually this is what I wanted to just just to see so it is a bit of a question of a budget really. But yeah I guess the the premise is that okay if we use by by adding auxiliary data we increase the budget and okay that's one thing that needs to be said. And with this increased budget actually we can do different things so I guess we can use different proportions or like or we can maybe yeah it would mean that if we had infinite amount of auxiliary data we could be kind of probably we could just increase it. Yeah that would be interesting to see here. Okay but yeah okay and then now let's the here the auxiliary data is C4100 right?
+[00:14:13] [Speaker2]: Yes sir.
+[00:14:14] [Speaker1]: Not noise. So the total data size is same across all the rows it's 5050 right?
+[00:14:22] [Speaker2]: Yes yes sir 5050 Yes sir yes sir.
+[00:14:32] [Speaker1]: Okay but now if we look on the noise data which or then noise used as auxiliary at a fixed budget like if set budget what kind of noise makes the best distillation?
+[00:15:01] [Speaker2]: And shuffling is I think doing better.
+[00:15:06] [Speaker1]: Yeah the thing is that this is 955 I mean maybe if we could have a fixed proportion so the same amount of in distribution and noise data like basically the same setting for all the types of noises so we could really look which noise makes sense which doesn't. And I mean do you have like 7030 or
+[00:15:32] [Speaker2]: Like for salt and pepper noise I also have this table like for different proportions.
+[00:15:37] [Speaker1]: Yeah but I I okay but now this we this we already established really okay we can we can see probably similar thing here. Actually not the thing is that if we have a fixed budget using this salt and paper pepper pepper using more training data well it's super noisy here. It doesn't harm at least using more training data and actually it it improves okay yes so more training data of course improves but more auxiliary data here doesn't doesn't really fix EC right?
+[00:16:19] [Speaker2]: Yes sir.
+[00:16:19] [Speaker1]: So I would say it's kind of we don't have we don't observe the same effect as we observe with using C4100 right? Because EC is kind of flat and NL is also kind of I'd say yeah well it's not flat but okay EC is flat. And then uncertainty for this other data set is also okay there is a pattern.
+[00:16:48] [Speaker2]: Okay in the last column.
+[00:16:52] [Speaker1]: Okay would you have a table that you have like this let's say 1000 no not 1000 right like fixed let's say 5050 or full in distribution plus the same amount of noisy data but with different types of noises so we can compare the different types of noise.
+[00:17:17] [Speaker2]: So like you want fixed proportion across all noises.
+[00:17:20] [Speaker1]: Yeah so we could compare noises different noises right?
+[00:17:23] [Speaker2]: Yes sir. Just maybe we can take 7030.
+[00:17:28] [Speaker1]: 7030 or 5050 or something like that.
+[00:17:32] [Speaker2]: Yes sir I'll just read the table I have the results it's
+[00:21:58] [Speaker1]: Ah yes sir these are the results for 5050 ratio.
+[00:22:02] [Speaker2]: Okay.
+[00:22:09] [Speaker1]: So we have what Gaussian with noise with half sigma half sigma two salt and pepper point three patch shuffle L1 patch shuffle L2. And it seems that what the lowest error we get when we do patch shuffle L1. And the lowest EC we get when we do I mean from the versions with noise patch shuffle L1. And and the lowest NL we get where we do patch shuffle L1 okay. And the real out of this C4100 is also with budget 5050 right?
+[00:23:06] [Speaker2]: Yes sir.
+[00:23:07] [Speaker1]: And E and D squared is with budget basically 100% on in distribution right?
+[00:23:13] [Speaker2]: In distribution data only yes sir you're right.
+[00:23:15] [Speaker1]: Okay and what exactly is this patch shuffle L1?
+[00:23:26] [Speaker2]: Dividing the image into four pieces like two plus two then shuffling these patches.
+[00:23:32] [Speaker1]: Shuffle so sorry again you take an image and you divide it into patches.
+[00:23:37] [Speaker2]: Yes sir cutting it into four pieces.
+[00:23:39] [Speaker1]: Four pieces.
+[00:23:41] [Speaker2]: Yes sir L2 is cutting it into 16 pieces.
+[00:23:46] [Speaker1]: Okay four pieces and just shuffling them.
+[00:23:50] [Speaker2]: Yes sir shuffling randomly.
+[00:23:58] [Speaker1]: So actually it doesn't seem like a lot of noise right?
+[00:24:03] [Speaker2]: No sir.
+[00:24:08] [Speaker1]: Interesting. Okay we lost rigid for some some reason. Now would you have results also if you used a whole 100% of the C410 for in distribution and just let's say additional 100 like 50,000 of patch shuffle L1.
+[00:24:45] [Speaker2]: Yes sir I said 50,000 of in distribution and 50,000 of patch shuffle.
+[00:24:49] [Speaker1]: Yes.
+[00:24:51] [Speaker2]: No sir I don't have those results.
+[00:24:55] [Speaker1]: Okay so rigid what do you think about this comparison because it seems that because patch shuffle L1 from what I understand is like just like we divide image into four pieces. And like four four four squares and just shuffle them and that's very little of modification to the image right?
+[00:25:22] [Speaker2]: One minute Thomas.
+[00:25:23] [Speaker1]: Yeah. And also the problem is that actually it is not no no better than the baselines so no better than E and D squared at all.
+[00:25:40] [Speaker2]: I I think see fundamentally I guess when the total number of data points were much larger than what is being used to get E and D square right? So E and D square plus aux when the aux is some additional data. I think in that situation they were able to get improvement in in domain performance right?
+[00:26:08] [Speaker1]: Yes sir.
+[00:26:10] [Speaker2]: So I think in our setup also the experiments we can conduct is possibly by keeping the in distribution the same and then out of distribution the auxiliary data set. As we keep increasing how how how it is the performance is changing.
+[00:26:28] [Speaker1]: Yeah.
+[00:26:28] [Speaker2]: And that that is one thing we can consider.
+[00:26:31] [Speaker1]: I'll just yeah we can probably we can generate infinite or not really infinite with if we just we would go to patch shuffle of one but we can keep generating much more the noisy data right and see really what's being happening with this matrix but which noise should we use or maybe we should actually try to use different or mix them or because yeah. As
+[00:27:12] [Speaker2]: So in this experiment table three what what was the percentage of in distribution and noise noise data?
+[00:27:20] [Speaker1]: 5050
+[00:27:21] [Speaker2]: It is 5050. Like 25,000 in distribution 25,000 in auxiliary data. Yeah maybe we could also yeah yeah I think
+
+[00:27:58] [Speaker2]: which for each of these cases one direction would be to fix the in distribution data set to let's say 50,000 and as far as the noisy data set we can have as much as we want, right? We can possibly have more more number of noisy data than the auxiliary data set than the auxiliary data set also. So that is one advantage. For instance, maybe with auxiliary data set we may get a good performance. Let's say with 90 like another 50,000 but maybe with noisy data set we may have to go to I don't know like 1 lakh maybe 75,000 or something like that to get a improvement in performance. I don't know. We need to study that like as we keep adding the noisy data if it is improving the in domain performance or if it is worsening the in domain performance.
+[00:29:05] [Speaker1]: Yeah.
+[00:29:05] [Speaker2]: The noisy data are nothing but yeah, some variation of the in domain data only, right? So I don't expect it to affect that much in domain performance as well as the noise is within some limit. But another question, did you do any study what happens when you add change keep increasing the noise noise level? Is there a difference?
+[00:29:35] [Speaker3]: Yes, sir. I have done it on Gaussian point five in Gaussian. Gaussian two was giving like it was more giving high uncertainty entropy values but it was giving less performance accuracy compared to this Gaussian 25.
+[00:29:57] [Speaker2]: So table Gaussian says that Gaussian 0.5 gave better results, right?
+[00:30:01] [Speaker3]: Yes, sir.
+[00:30:03] [Speaker2]: That means uncertainty modeling is also better for Gaussian 0.5, right?
+[00:30:08] [Speaker3]: Yes, sir.
+[00:30:11] [Speaker2]: And error is also better for 0.5. Yeah, I think it's always good to add small amount of noise, not too much noise.
+[00:30:29] [Speaker1]: But it's interesting if you look on the part shuffle L1, right? It's actually the best out of the noise approaches.
+[00:30:45] [Speaker2]: Uh batch shuffle L1 give the best performance, right?
+[00:30:48] [Speaker1]: Yes.
+[00:30:49] [Speaker3]: Yes, sir. In in both the table it's giving better than others.
+[00:30:57] [Speaker2]: So what is the difference between batch shuffle L1 and L2?
+[00:31:01] [Speaker3]: In L1 we are cutting the imaging force together but in L2 we are dividing it into 16 together then shuffling these pieces randomly.
+[00:31:10] [Speaker2]: Ah okay okay sure. Yeah, so I don't know maybe based upon this experiment we can conclude on going with batch shuffle L1.
+[00:31:36] [Speaker1]: But I think we should maybe take a look also like try to go with batch shuffle L1 and maybe Gaussian 0.5 and see really what happens if we add like we use 50,000 of in distribution then 50,000 of noise, 100,000 of noise, 150 of noise, 200 of noise and then we can see really if this saturates if this kind of like yeah, I I really don't know what's going to happen. Maybe I'm guessing that at some point adding too much noisy data will start hurting like in distribution performance. But if this happens for both of these noise types at the same at the same speed, I'm not sure and maybe after that we could try to actually use mix. So use both types of noises and see really what happens. So like having 50,000 of noisy 100,000 of noisy 150,000 200,000 noise noisy data patch but within this noisy data use having half with Gaussian noise, half with batch shuffle L1 and see what happens. This is what I would be interesting, right?
+[00:32:59] [Speaker3]: But sir my question is if we have 50,000 in distribution only, how can we generate 75,000 or the noisy versions? For each image we will get one noisy version.
+[00:33:09] [Speaker1]: Yes, no not not not necessary. You can have multiple why not? It's just the random noise, right?
+[00:33:15] [Speaker3]: Oh yes.
+[00:33:17] [Speaker1]: So you can have
+[00:33:19] [Speaker3]: mixture of noises maybe.
+[00:33:21] [Speaker1]: Uh well I wouldn't start with mixture of noises at this point. I would consider separate I would have first look on like what happens with both of these types and separately then kind of use maybe like both types of noises but on like separate images. So don't apply don't don't mix noise on the same image and then maybe you can mix the same noise in images and that would be a separate experiment and then we would see really how this additional data helps or what happens really if we with the with one scaling and adding more of different types of noises and different proportions.
+[00:34:29] [Speaker2]: Yeah, I think we can do this experiment and see how it goes. Yeah, is there anything else to discuss?
+[00:35:25] [Speaker3]: No, sir.
+[00:35:31] [Speaker1]: I guess let's do this then and see what happens.
+[00:35:36] [Speaker2]: And this is hyperparameter tuning that that you have done. For example, there will be two loss terms, right? One involving in distribution and other involving out of distribution or both are just considered loss term.
+[00:35:51] [Speaker3]: Both are using the same loss term.
+[00:35:54] [Speaker2]: Okay. The other question is okay, should we consider it does two different losses with a regularization term which would give less weightage to noise but that would be similar to considering lower number of noisy data points also, right?
+[00:36:14] [Speaker1]: Yeah, that would that would be operating again within this fixed budget regime, right?
+[00:36:23] [Speaker2]: Right right yeah.
+[00:36:24] [Speaker1]: Yeah.
+[00:36:37] [Speaker2]: So another question is do we the what is what exactly is the loss function that we are using? Is it a KL divergence?
+[00:36:45] [Speaker3]: No, negative log likelihood. What is the likelihood here?
+[00:37:00] [Speaker2]: Likelihoods are basically the teacher categorical is that we are generating during this transfer set. Sorry? The teacher categorical is for each of the sample we are generating from during the distillation or transfer set. I didn't understand.
+[00:37:25] [Speaker1]: So the the point is that are we not trying to distil the actual probabilities from the teacher to student?
+[00:37:33] [Speaker3]: We are already doing that only like for every sample we are getting different categories from like a 10 teachers and based on like those probability vectors we are using this likelihood also.
+[00:37:46] [Speaker2]: And what is the likelihood from function? Uh what is that likelihood? It's based upon the distribution like do the parameter distribution?
+[00:38:07] [Speaker3]: Yes, it is in distribution only yes.
+[00:38:18] [Speaker2]: So some works perhaps uses some kind of a KL divergence also, right? In this literature are people always using this likelihood or do they consider some other loss functions also?
+[00:39:02] [Speaker3]: I was following the paper. They had used this loss function only.
+[00:39:06] [Speaker2]: Uh but later papers did they use the same loss function or some other loss function?
+[00:39:17] [Speaker3]: There was another paper that was using I guess another paper was using the distillation in the same way but where they were using the some different loss function like maximum posterior like that. Actually I was following this paper only so I didn't try to use different loss function.
+[00:39:40] [Speaker2]: Okay okay that's fine sure.
+[00:39:42] [Speaker3]: Yes.
+[00:39:45] [Speaker2]: Okay sure. Yeah, then anyway you can do this experiments and we can see how it goes.
+[00:39:50] [Speaker3]: Yes, sure.
+[00:39:53] [Speaker2]: Okay Thomas.
+[00:39:55] [Speaker1]: Okay uh right, thank you and see you. Have a nice evening I guess it's in India.
+[00:40:04] [Speaker2]: Uh yeah. All right, yeah. Thank you. Have a nice day. Bye.
+[00:40:08] [Speaker3]: What do you think, sir?

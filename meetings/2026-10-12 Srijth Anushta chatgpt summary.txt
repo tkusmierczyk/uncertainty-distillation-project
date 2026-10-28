@@ -1,0 +1,189 @@
+## 1. Executive summary
+
+The meeting focused on evaluating uncertainty estimation in a teacher–student knowledge distillation framework for dialogue summarization. Anushta presented experimental results comparing a teacher model with three student approaches: Softmax, Dirichlet (referred to as “DISH” in parts of the transcript), and Laplace.
+
+The experiments examined whether the student models preserve summary quality while improving uncertainty estimation under distribution shifts. The results showed broadly similar generation quality across models on in-distribution data, increased uncertainty on shifted datasets, and a consistent dominance of aleatoric over epistemic uncertainty.
+
+**The main conclusion was that the initial results were promising but insufficient to establish reliable differences between methods.** The professors recommended increasing the number of evaluation samples, investigating why epistemic uncertainty was so small, and understanding why student models sometimes appeared to outperform the teacher on out-of-distribution data.
+
+## 2. What Anushta presented
+
+### A. Experimental setup
+
+Anushta described a teacher–student framework in which the input consists of a conversation or article and the output is a summary.
+
+The experiments used the following datasets or variants:
+
+| Dataset / variant | Description | Purpose |
+|---|---|---|
+| SAMSum | Conversations between people, paired with summaries | Training and in-distribution evaluation |
+| DialogSum | Short, everyday conversations with summaries | Evaluation on a related but unseen dataset |
+| Shuffled SAMSum | SAMSum inputs with words shuffled | Evaluation under input corruption |
+| News | News articles paired with human-written summaries of approximately 2–3 lines | Evaluation under a more substantial domain shift |
+
+The teacher model was compared with three student approaches: Softmax, Dirichlet, and Laplace.
+
+Anushta evaluated two broad aspects:
+
+- **Generation quality:** ROUGE-based scores, including ROUGE-1, ROUGE-2, and ROUGE-L.
+- **Uncertainty estimation:** Total uncertainty and its aleatoric and epistemic components, alongside uncertainty-related evaluation metrics such as AUROC.
+
+The transcript refers to several experiments using relatively small subsets. Approximately 2,000 training samples and 300 evaluation samples were mentioned for some experiments, while other evaluations used around 2,000 samples. The full SAMSum dataset was reported to contain approximately 16,347 examples.
+
+### B. Uncertainty estimation results
+
+Anushta's main observation was that uncertainty generally increased as the evaluation data moved away from the training distribution.
+
+The reported total uncertainty for the teacher was approximately 1.13 on the original SAMSum data, increasing to roughly 1.22–1.49 on other variants and reaching approximately 1.66 on the News dataset.
+
+The main findings were:
+
+- News produced the highest uncertainty, consistent with it representing a more substantial domain shift.
+- The shuffled dataset also produced increased uncertainty.
+- Both teacher and student models exhibited this general pattern.
+- Total uncertainty was dominated by the aleatoric component.
+- Epistemic uncertainty was comparatively small, particularly for the Dirichlet and Laplace approaches.
+
+Anushta highlighted that the epistemic uncertainty values for Dirichlet and Laplace were around 0.03–0.04 in the reported results, substantially smaller than the corresponding teacher-model uncertainty.
+
+This raised an important question: were the models genuinely capturing uncertainty arising from limited knowledge, or were the reported uncertainty improvements driven primarily by aleatoric uncertainty?
+
+### C. Generation quality
+
+Anushta showed ROUGE-based results comparing the teacher and student models.
+
+The discussion indicated that:
+
+- On SAMSum, the student models achieved generation quality broadly comparable to that of the teacher.
+- The Dirichlet and Laplace students appeared to perform similarly to the teacher on in-distribution data, with small differences in individual scores.
+- DialogSum results were surprisingly good for the student models, despite DialogSum not being used for training.
+- News results were worse than those on the more familiar dialogue data, which was considered more consistent with expectations under domain shift.
+
+The reported differences were generally small, and the professors questioned whether they were meaningful given the limited evaluation sample sizes.
+
+Anushta also showed training curves, including distillation loss, validation loss, gradient norm, and teacher–student KL divergence. Prof. Tomasz did not identify anything suspicious in these curves.
+
+---
+
+## 3. What was discussed
+
+### A. Do the student models preserve generation quality?
+
+Prof. Tomasz examined whether the student models produced summaries of comparable quality to the teacher.
+
+The ROUGE scores on SAMSum appeared close across the methods. The group agreed that the student models seemed to learn the teacher's generation behaviour reasonably well.
+
+However, the professors distinguished between two claims:
+
+1. The student models preserve generation quality.
+2. The student models genuinely outperform the teacher on unseen data.
+
+The first appeared plausible from the initial results. The second was not established.
+
+Prof. Tomasz was particularly interested in why the students sometimes obtained better ROUGE scores than the teacher on DialogSum, even though they performed slightly worse on the original SAMSum distribution.
+
+Anushta suggested that the structural similarity between SAMSum and DialogSum might explain the results. Prof. Tomasz considered this possible but regarded the apparent improvement as surprising and potentially an artefact of the experimental process.
+
+**Conclusion:** The apparent improvements on DialogSum need further investigation rather than being interpreted as evidence that distillation improves out-of-distribution generation.
+
+### B. Are the uncertainty differences statistically meaningful?
+
+Prof. Tomasz questioned whether the observed differences between uncertainty metrics and generation scores were meaningful.
+
+The concern was that the evaluation datasets and sample sizes were too small to support reliable conclusions. Small differences could reflect sampling variability rather than genuine differences between methods.
+
+The professors therefore recommended repeating the experiments with more evaluation examples before comparing the methods in detail.
+
+Anushta agreed to increase the sample sizes and rerun the experiments.
+
+**Conclusion:** The current numerical differences should be treated as preliminary. More extensive evaluation is required before making comparative claims.
+
+### C. Why is epistemic uncertainty so small?
+
+This was one of the central scientific questions of the meeting.
+
+Anushta observed that total uncertainty appeared to be driven primarily by aleatoric uncertainty in both the teacher and student models. Even when the student methods produced higher total uncertainty, much of the increase came from the aleatoric component.
+
+Prof. Tomasz noted that a similar pattern had appeared in earlier experiments conducted by another researcher, Harsha. The recurrence suggested that the issue might not be specific to Anushta's implementation.
+
+The discussion considered several possible explanations:
+
+- The teacher model itself may provide insufficient epistemic uncertainty for distillation to preserve or improve.
+- The uncertainty decomposition or model configuration may need further investigation.
+- The current sampling procedure may be insufficient to capture epistemic uncertainty adequately.
+
+Prof. Srijit subsequently suggested increasing the number of samples used to estimate uncertainty. Anushta had used eight adapter samples in the current setup. Prof. Srijit recommended experimenting with a larger number because this might improve the estimation of epistemic uncertainty.
+
+The transcript does not establish which explanation is correct.
+
+**Conclusion:** The low epistemic uncertainty remains unresolved. Increasing the number of adapter samples and investigating the teacher's uncertainty behaviour are concrete next steps.
+
+### D. Does domain shift increase uncertainty as expected?
+
+Anushta reported higher uncertainty on shuffled data and, especially, on News data.
+
+Prof. Tomasz and Prof. Srijit considered this observation encouraging because it suggested that the models responded to changes in the input distribution.
+
+However, the group did not conclude that the uncertainty estimates were reliable enough to distinguish all forms of distribution shift. In particular, the small epistemic component made it unclear whether the models were correctly capturing uncertainty due to unfamiliar data.
+
+**Conclusion:** The observed increase in uncertainty under domain shift is promising, but its interpretation requires more experiments and a better understanding of the aleatoric–epistemic decomposition.
+
+### E. Should uncertainty evaluation use total uncertainty or epistemic uncertainty?
+
+Prof. Tomasz asked whether the uncertainty-related evaluation metric, referred to as AUROC in the discussion, could also be calculated using epistemic uncertainty rather than only total uncertainty.
+
+Anushta explained that the earlier experiments had included separate aleatoric and epistemic decompositions, but this decomposition had been omitted from the current set of results.
+
+Prof. Tomasz requested that the additional analyses be included in future runs.
+
+**Conclusion:** Future evaluation should compare uncertainty-related metrics based on total uncertainty and epistemic uncertainty, rather than relying exclusively on total uncertainty.
+
+---
+
+## 4. What was concluded?
+
+The meeting produced the following conclusions.
+
+- **Generation quality is broadly preserved.** The student models appear to produce summaries of quality comparable to the teacher on the evaluated data, particularly on SAMSum. This remains a preliminary observation.
+- **Uncertainty increases under distribution shift.** The News and shuffled datasets generally produced higher uncertainty. The pattern is promising, but it does not yet establish the quality of the uncertainty estimates.
+- **Epistemic uncertainty remains a major problem.** Total uncertainty is dominated by aleatoric uncertainty, and the reason for the small epistemic component is not yet understood.
+- **The unexpected DialogSum results require investigation.** The students' apparently better performance than the teacher on this unseen dataset should not be treated as a confirmed improvement until the experiments are repeated with more samples.
+- **Further experiments are required before drawing firm conclusions.** Anushta was asked to rerun the analyses with more data points, investigate epistemic uncertainty, and prepare additional uncertainty-based evaluation results.
+
+## 5. Action items
+
+| Responsible person | Action item | Purpose |
+|---|---|---|
+| Anushta | Increase the number of evaluation samples and rerun the existing comparisons. | Determine whether the observed differences are reproducible and meaningful. |
+| Anushta | Increase the number of adapter samples beyond the current eight. | Investigate whether epistemic uncertainty estimates improve. |
+| Anushta | Report the aleatoric and epistemic components separately in the next experiments. | Determine which uncertainty component drives the results. |
+| Anushta | Calculate uncertainty-related evaluation metrics using epistemic uncertainty as well as total uncertainty. | Compare the effectiveness of different uncertainty measures. |
+| Anushta | Investigate why student models appear to outperform the teacher on DialogSum and some other evaluations. | Determine whether the behaviour is genuine or an experimental artefact. |
+| Anushta | Review relevant literature for explanations of the low epistemic uncertainty and unexpected student performance. | Identify plausible explanations and design targeted experiments. |
+| Anushta | Bring the updated results to the next discussion. | Enable a more reliable comparison of Softmax, Dirichlet, and Laplace. |
+| Professors | Review the new results and provide further feedback. | Decide which experimental direction should be pursued next. |
+
+## 6. What should be presented at the next meeting?
+
+Based on the discussion, the next presentation should focus on resolving the open questions rather than simply reproducing the existing tables.
+
+1. **Expanded experimental results:** Updated ROUGE scores and uncertainty metrics using larger evaluation samples.
+2. **Uncertainty decomposition:** Aleatoric and epistemic uncertainty for the teacher and all three student models, across SAMSum, DialogSum, shuffled SAMSum, and News.
+3. **Adapter-sampling experiment:** A comparison of epistemic uncertainty estimates using eight samples versus a larger number of samples.
+4. **Out-of-distribution generation quality:** A focused analysis of why the student models appear to perform better than the teacher on DialogSum.
+5. **Uncertainty evaluation:** AUROC or the corresponding uncertainty-evaluation metric based on both total and epistemic uncertainty.
+6. **Interpretation:** An assessment of whether the findings persist with more samples, together with possible explanations supported by the literature.
+
+The meeting ended with an intention to continue the discussion after the new experiments. Anushta indicated that the changes would be made and the results prepared for the next discussion. Prof. Srijit indicated that the meeting could proceed without Anushta if she was unavailable on Thursday, with feedback communicated afterward.
+
+## Overall assessment
+
+The meeting was primarily an evaluation and troubleshooting discussion. Anushta presented evidence that the student models preserve generation quality and that estimated uncertainty increases on shifted datasets. The professors did not consider the results sufficient to demonstrate that Dirichlet or Laplace provides superior uncertainty estimation.
+
+The two most important unresolved research questions are:
+
+1. **Why does aleatoric uncertainty dominate total uncertainty, leaving epistemic uncertainty very small even under distribution shift?**
+2. **Why do distilled student models sometimes appear to outperform the teacher on unseen datasets, particularly DialogSum?**
+
+The immediate priority is to obtain more reliable measurements and conduct targeted experiments that can explain these two behaviours.
+

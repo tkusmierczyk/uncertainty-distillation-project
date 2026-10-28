@@ -1,0 +1,84 @@
+## Meeting Summary: Profs. Tomasz and Srjith with Anushta
+
+Main topic: Evaluating uncertainty estimation methods for language models, particularly after distillation, using in-distribution (ID) and out-of-distribution (OOD) data.
+
+### 1. What was discussed?
+
+A. Uncertainty estimation experiments
+
+Anushta presented experiments on uncertainty estimation for LLM summarization tasks. Two entropy estimation methods were considered:
+
+- PREX: Token-level uncertainty estimation.
+- AXPR: Sequence-level uncertainty estimation.
+
+She reported results for four datasets or dataset variants:
+
+- Samsung: The in-distribution (ID) dataset, containing dialogues and their summaries.
+- Dialogue-summary dataset: Similar summarization data with shorter, everyday conversations.
+- Shuffled Samsung: Samsung data with words randomly shuffled to create a distribution-shifted dataset.
+- News: Short news articles paired with human-written, one-line summaries.
+
+The preliminary experiments used 1,000 samples for training-related evaluation and 300 OOD samples per dataset or setting. Anushta presented uncertainty scores for the distilled student model.
+
+B. Student versus teacher model comparison
+
+Prof. Tomasz emphasized that the student model's results alone were insufficient. He asked Anushta to provide the corresponding teacher model uncertainty scores, so that the effects of distillation could be evaluated directly.
+
+The comparison should establish how uncertainty changes between the teacher and student, rather than merely reporting the final student model's performance.
+
+C. Laplace approximation and training behavior
+
+Anushta discussed experiments involving Laplace-based uncertainty estimation and Softmax-based methods. She presented training curves, including training loss and the sum of the \\(\alpha\\) parameters, which increased during training and subsequently stabilized.
+
+She reported that the Laplace-based student model showed promising OOD uncertainty results.
+
+However, Prof. Tomasz cautioned that strong OOD uncertainty scores do not necessarily indicate a good uncertainty estimation method.
+
+For example, a model that is excessively uncertain on all inputs may appear successful at identifying OOD data while also being unnecessarily uncertain on normal, in-distribution inputs.
+
+Therefore, the key question is whether the improved OOD uncertainty comes at the expense of ID performance.
+
+### 2. Main conclusions
+
+The meeting established the following evaluation priorities:
+
+1\. OOD results must be interpreted alongside ID results. High uncertainty on OOD inputs is not sufficient if the model is also highly uncertain on ID inputs.
+
+2\. Teacher–student comparisons are necessary. The uncertainty scores of the teacher and distilled student should be compared to determine what distillation changes.
+
+3\. The Laplace results require further investigation. Although the Laplace-based student appeared promising on OOD data, its ID behavior must be examined before drawing conclusions.
+
+4\. The results need to be consolidated. Anushta had the relevant teacher and ID results but had not yet merged them into a single presentation. The meeting ended before a complete comparative analysis could be reviewed.
+
+Overall conclusion: No method was definitively established as superior. The next step is to evaluate uncertainty estimation jointly on ID and OOD data and compare the teacher with the distilled student.
+
+### 3. What was decided?
+
+| Action item                                                                | Responsibility   | Purpose                                                                    |
+| -------------------------------------------------------------------------- | ---------------- | -------------------------------------------------------------------------- |
+| Merge and present teacher-model uncertainty scores.                        | Anushta          | Establish a baseline for comparison with the student.                      |
+| Present the in-distribution results for the teacher and distilled student. | Anushta          | Check whether OOD uncertainty improvements compromise ID behavior.         |
+| Consolidate the Laplace results with the other experimental results.       | Anushta          | Enable a consistent comparison of methods.                                 |
+| Continue the discussion in the next meeting.                               | All participants | Review the consolidated results and determine the next experimental steps. |
+
+### 4. Next meeting
+
+- Day: Monday
+- Time: 3:30 PM India time
+- Scheduling: Prof. Tomasz indicated that he would try to create the meeting, but the participants also discussed who would send the invitation. The transcript does not conclusively establish that the invitation was sent.
+
+### 5. Recommended preparation for the next meeting
+
+Anushta should prepare a consolidated results table containing:
+
+| Evaluation dimension          | Required comparison                                                                                       |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------- |
+| ID uncertainty                | Teacher vs. student                                                                                       |
+| OOD uncertainty               | Teacher vs. student                                                                                       |
+| Distillation effect           | Change in uncertainty from teacher to student                                                             |
+| Laplace vs. Softmax           | ID and OOD performance for both methods                                                                   |
+| Calibration or discrimination | Whether uncertainty distinguishes ID from OOD inputs without making all predictions excessively uncertain |
+
+The most important analysis is whether the Laplace method increases uncertainty selectively on OOD examples while preserving reliable predictions on ID examples.
+
+In one sentence: Prof. Tomasz asked Anushta to consolidate teacher–student and ID–OOD uncertainty results before claiming that Laplace-based uncertainty estimation improves OOD detection, and the group agreed to continue the discussion on Monday at 3:30 PM India time.

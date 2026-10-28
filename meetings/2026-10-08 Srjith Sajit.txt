@@ -1,0 +1,116 @@
+[00:00:39] [Speaker1]: Good afternoon sir. In the last meeting we had you like we are trying using the fixed size training data at the at the training time like total come in distribution and auxiliary data we are keeping the overall size fixed like we had kept it at 50,000. Then we were wearing the ratio between the in distribution and out of distribution data and according accordingly we saw the results. But then for this meeting we decided that we should keep the in distribution data fixed at 50,000 samples like training data so that it does not hamper our in distribution performance. And then try different sizes of out of distribution or auxiliary data and see how it how it goes. So for that I have got them got some results. Like here table three shows this classification accuracy on the in distribution test data. And we had decided to keep to work on two noises one was gaussian noise and another was this air shuffling like two cross two image. If we maybe look at so this table three first one is teacher results the second one is in this pseudo data results when trained on in this in distribution data only. And the third column is yeah here I have kept in this table auxiliary data fixed at 50k in the following tables I have shown results for all different sizes of auxiliary data but in this table I have kept auxiliary data at 50k fixed.
+[00:02:42] [Speaker2]: Okay so it seems that like it's interesting what is in the last column that using this additional C fort and actually harms the performance and the in distribution I guess. How about and then okay the gaussian with sigma zero point five doesn't actually do much. The question is does it do anything for out of distribution data? I guess the next table point.
+[00:03:20] [Speaker1]: Yes sir the next table is
+[00:03:23] [Speaker2]: So it doesn't do anything basically right?
+[00:03:30] [Speaker1]: Yes sir.
+[00:03:31] [Speaker2]: So we have the trade off so if we use this shuffle L one or C four 100 then our numbers drop for the in distribution data and but improve for out of distribution data. That's
+[00:03:52] [Speaker1]: No sir for in distribution also they are doing better results because this error rate 8.5 is like worse than 7.8 if we see.
+[00:04:00] [Speaker2]: All right right yeah so we we minimize error rates yes so it's better. And EC is also better and then L also oh yeah yeah sorry I was reading it wrong. Right just the improvement for patch shuffle L one is slightly smaller than for C four 100 but it's okay. And yeah if you could scroll down a bit once again. So we don't get as much as improvement as with C four 100 but we do get improvement.
+[00:05:01] [Speaker1]: Sir actually I'm doing this right on four days that is a good thing.
+[00:05:05] [Speaker2]: Yes sir. Okay and this is 50,000 plus 50,000 of auxiliary right?
+[00:05:13] [Speaker1]: Yes sir yes sir.
+[00:05:15] [Speaker2]: Okay and if we we also discussed to to try different like number of additional.
+[00:05:21] [Speaker1]: Yes sir I also have those trade groups.
+[00:05:23] [Speaker2]: Okay.
+[00:05:31] [Speaker1]: Yes sir for this is C four 100 auxiliary data here we varied it like tested at different sizes like 10k out of auxiliary data size 25k and 50k and these are the results at different auxiliary data sizes. And in distribution data we have kept it that fixed as fixed at 50k samples.
+[00:05:49] [Speaker2]: Yeah okay we don't see really if because this is just to the the same problem like it's the same size of in distribution data right and we don't know really what but C four 100 there there is no more data right?
+[00:06:03] [Speaker1]: Yes sir there is no more.
+[00:06:04] [Speaker2]: Okay and for the like no noise in data. Do we have
+[00:06:10] [Speaker1]: For gaussian it is not giving any much improvement here.
+[00:06:14] [Speaker2]: Yeah for gaussian what's there it doesn't have really much effect and actually more data is just harming everything. Guess.
+[00:06:27] [Speaker1]: But it is giving much better improvement if we see at another noise like this air shuffling. This one.
+[00:06:36] [Speaker2]: Okay so patch shuffle okay this actually it's improves
+[00:06:43] [Speaker1]: Yes sir.
+[00:06:44] [Speaker2]: error and improves calibration negative likelihood out of distribution. Okay. A a question so it seems that using more like auxiliary data actually helps here right? It's just the question like for if we didn't use in the case where we don't use it is it like a converged result meaning that if we keep training on this data wouldn't it keep improving? Are we sure that it's already like in this stale point? Because I mean like we increase the again it's a question of this kind of let's say budget or understanding the data size right? So we have here more data we use I I assume we use the same number of iterations right?
+[00:08:15] [Speaker1]: Yes sir yes sir.
+[00:08:16] [Speaker2]: Yes so but each epoch is like what five times longer than without any in the
+[00:08:26] [Speaker1]: Compared to the E and D D yes sir.
+[00:08:28] [Speaker2]: Yeah so if we train the original on the original data just five times longer would would there be an improvement? I'm just wondering because I mean if this if if this number of epochs is enough for convergence if we are converged there shouldn't be an improvement with the longer training on the same data right? It's just a like a sanity check that we could actually do to make sure that this is not just because we have not trained for long enough.
+[00:08:58] [Speaker1]: Yes sir that I haven't done yet we are doing it by the next time.
+[00:09:02] [Speaker2]: Okay. But yeah I guess so is there anything else we should take a look or
+[00:09:11] [Speaker1]: No sir this stops all.
+[00:09:13] [Speaker2]: Okay.
+[00:09:20] [Speaker1]: So as we keep increasing the noisy data the noisy data the out of distribution it is silence is yes sir it is increasing. But it may in distribution performance.
+[00:09:34] [Speaker2]: But here also it is improving in distribution performance also improving here.
+[00:09:37] [Speaker1]: In distribution is improving for some time and then
+[00:09:41] [Speaker2]: Yes sir then it's fluctuating.
+[00:09:43] [Speaker1]: Change that right?
+[00:09:44] [Speaker2]: Yes sir.
+[00:09:45] [Speaker1]: So beyond that point there is no improvement no sir.
+[00:09:58] [Speaker2]: Uh what is this column copies it's a zero one one one two two three four four what is this?
+[00:10:04] [Speaker1]: Basically we have only sir 50,000 ID samples and we have to create like 200 samples for them so first copy is like taking the noise with one random seed second copy is taking the noise with different random seed and all.
+[00:10:19] [Speaker2]: Okay yeah. Um okay yeah the conclusion is that with the right noise I guess that the isolation actually can be improved just by adding this noise to the data. And actually it seems this is it's can help not only in out of distribution but also in distribution data. Um it's now what do you think Srijit and what now the question would be what what what to do with it next?
+[00:10:57] [Speaker1]: Uh okay okay. So uh I think so this is yeah first you see everything right and the noise in gaussian. And uh so if I re-collect uh in the original paper they tried auxiliary data but the the actual actual distribution.
+[00:11:27] [Speaker2]: Yes sir.
+[00:11:31] [Speaker1]: Then the only thing I think we need to so so we can look at this out of distribution performance. Uh on Elson then tiny image tiny image right? It is also the case sir is using the actual auxiliary real auxiliary data is giving better performance.
+[00:12:01] [Speaker2]: Yes sir.
+[00:12:02] [Speaker1]: Or the noise in gaussian is giving better the real one is giving better. Like if I show the table we have this one. Yes we should do that. Here on Elson noise even is giving better performance but it is using 200 18 noisy samples. We we are very expectation uh here we have C four 100 as a out of distribution data and uh using that without we will go to all the that all other distribution data. Uh we have some out of distribution reductions. Uh I expect an average and noisy points will be performing better on more number of only detection frequencies. And uh uh C four 100 specifically
+[00:13:34] [Speaker2]: I'm not sure.
+[00:13:35] [Speaker1]: This is training in this chart.
+[00:13:37] [Speaker2]: Yes sir.
+[00:13:51] [Speaker1]: Whether for me auxiliary point of view can we do something some improvement? And like for instance okay the training of things in terms of number of samples right?
+[00:14:09] [Speaker2]: Yes sir.
+[00:14:10] [Speaker1]: But instead can be trade off this behavior by using a normalization constant. Like we keep the number of samples the same but normalization constant we keep changing. We keep trying. And uh perhaps maybe like a structure different learning rates. Can we change lambda make our But uh these K of different learning rates so noisy loss and that is distribution loss. But we are using training using the same loss function so it Uh you don't use two different two different two different losses. One over the training data and another one are noisy like data. Uh in one case we can tell the error of the equation constant is lambda. It's kind of trade off that between their and noisy out of distribution will be having on the learning process. So can we expect carrying that constant lambda can turn on and provide the same effect that we obtained by training the number of samples.
+[00:16:01] [Speaker2]: And to be honest I haven't heard much of what you were saying so if you could just
+[00:16:07] [Speaker1]: You are my
+[00:16:08] [Speaker2]: Yeah.
+[00:16:10] [Speaker1]: Uh maybe I might end it. I'll mute my mic and I'll mute yourself. You are my I can mute you.
+[00:16:21] [Speaker2]: Now it's just if you could just repeat like summarize what was just said like what
+[00:16:27] [Speaker1]: Uh what I was saying the also my part get my results uh hold on can you tell me
+[00:16:38] [Speaker2]: Yeah but that's not super great the quality of the sound.
+[00:16:43] [Speaker1]: Uh how about now?
+[00:16:45] [Speaker2]: Now is way better yes.
+[00:16:48] [Speaker1]: Sure so what about adjusting is instead of reading the number of samples can we maintain two different losses?
+[00:16:57] [Speaker2]: Mhm.
+[00:16:58] [Speaker1]: Uh with the regularization constant associated with the loss computed over the noises samples. And by reading that regularization constant can we get a similar effect?
+[00:17:15] [Speaker2]: Uh instead of just longer training just increasing the impact of the of the out of distribution samples that would be sorry.
+[00:17:21] [Speaker1]: Yes sir. Yeah.
+[00:17:29] [Speaker2]: Okay. Yeah instead of changing the number of samples just change the weight of the with that loss function through which we compute our two distillation using the out of distribution samples.
+[00:17:46] [Speaker1]: Okay what what are we trying to show with this? Um
+[00:17:52] [Speaker2]: Uh so we can I mean design wise this is much more easier uh as we don't have to train of course we with with different lambdas we have to re-train things. But assuming okay we have availability to different sizes of noisy samples is much more difficult thing in a from a practical point of view than possibly just considering different values of lambda the regularization constant. Say for example if somebody want to design or use this technique uh it will be much easier to just fix the dump of samples uh for in distribution and out of distribution to be same and then just keep wearing the lambda uh so that they want the desired performance.
+[00:18:54] [Speaker1]: Okay yeah I get it so basically you always 50 plus 50 is just with sometimes give the higher weight to the this second 50 and
+[00:19:06] [Speaker2]: Yes.
+[00:19:06] [Speaker1]: Okay.
+[00:19:08] [Speaker2]: Yes. But can we bring some other methodological novelty as well for instance can we have a different learning rates for each of these different loss terms? Or can we use something which is which can you know improve the novelty aspects?
+[00:19:35] [Speaker1]: Mhm.
+[00:20:00] [Speaker2]: I would have to think really because okay we we kind of relates the or no rely on this E and D approach right the very basic one. I'm just wondering what else could we do and because there it's D as is this E and D is from what five years ago right? Something around that.
+[00:20:25] [Speaker1]: Yes yes.
+[00:20:27] [Speaker2]: Yeah so I'm just wondering if you can replace it or like just look into the equation there and see if there is something we could do.
+[00:20:37] [Speaker1]: Uh I think yes say for example this approach we can show that it is a general approach which can improve the performance in general with any kind of distillation technique. Right even if it is okay initial distillation itself if even if you use if one uses some other head or some other methodology adding these additional laws using this noisy version of the in distribution can help to improve the performance.
+[00:21:11] [Speaker2]: Yeah that's that's.
+[00:21:11] [Speaker1]: Do you think that also you think?
+[00:21:15] [Speaker2]: That would do something yeah that would be some interesting. I'm just also like wondering because we kind of have a one way we can't derived to kind of do this noise with this shuffling thing. I'm just wondering if we can do something around that like um I don't even know like okay it works for this data set I'm not sure if it works in general on why this one works and this other one doesn't do anything.
+[00:21:57] [Speaker1]: So we we we want to try out for a different data sets also right?
+[00:22:04] [Speaker2]: Yeah that's that's also but something that we should eventually study just I'm just wondering if we can somehow generalize the the this noise procedure or noise adding procedure. Or somehow optimize it for some criterion like just just to
+[00:22:29] [Speaker1]: Yeah that would be interesting if we can yeah fix a specific way of adding noise so that it can eventually improve this out of the performance right?
+[00:22:47] [Speaker2]: Yes. Yeah maybe we can think of adding noise in such a way that the the pretty performance is not affect. Hello I I think I lost you. Just wondering let's say if we use some adversarial attack kind of methods which actually changes the pretty performance right like they may not be able to perform well. There will be
+[00:23:46] [Speaker1]: Yeah something okay like
+[00:23:52] [Speaker2]: Okay just just I'm trying to see if in out of distribution if I consider a noisy image for which the model is able to detect it properly right? Now it's it's actual crops okay. Versus we consider a noisy image which the model is not able to detect it correctly. Like it is incorrectly closing to another class. So say which of these two or any of these two kinds of noisy images can have a bigger impact in out of distribution or or transferring knowledge to get better uncertainty modeling capability.
+[00:24:47] [Speaker1]: Okay but you would look on like pre pre-designed ways of adding noise or
+[00:24:56] [Speaker2]: Some out of say adversarial some some black box adversarial attacks which can result in some images noisy images.
+[00:25:11] [Speaker1]: Yeah yeah but I'm just thinking like all the time I'm thinking like generative this generative adversarial networks if if we can somehow optimize some generator that would generate images that are not too far from the data but somehow harm the the classifier.
+[00:25:36] [Speaker2]: Right. So so the class but but then our classifier is basically an ensemble method right?
+[00:25:50] [Speaker1]: Yes.
+[00:25:52] [Speaker2]: Yeah just that the ensemble methods will be having higher entropy for such data. And we if we use a simple classifier then it may end up processing to one of the processes with maybe a wrong class with very high probability right? But being an ensemble classifier we can expect that it will be having higher entropy on such data.
+[00:26:15] [Speaker1]: Mhm.
+[00:26:20] [Speaker2]: And we can possibly distill entropy better if we have such kind of noisy images.
+[00:26:28] [Speaker1]: So we could maybe optimize a generative network in a way that it doesn't harm the classification but it does increase the like uh um epistemic uncertainty of the ensemble that would be something. Or you had something
+[00:26:52] [Speaker2]: So so what what do we have to say it shouldn't harm the classification? If what if you okay if you only care about increasing the epistemic uncertainty then the image could be too noisy that it's an making any sense is it?
+[00:27:08] [Speaker1]: Yes yes.
+[00:27:09] [Speaker2]: Uh and if you also maintain the fact that okay it should not harm the classification decision then we may get some but with higher entropy. Okay.
+[00:27:26] [Speaker1]: Yeah.
+[00:27:31] [Speaker2]: That would be interesting I'm just wondering like how this should be implemented or test like done.
+[00:27:38] [Speaker1]: Sure sure. So should it be done as a two multiple stage process where we first learn an ensemble method and then we try to generate noise okay the simplest way to think of it is multi-stage approach right?
+
+[00:27:57] [Speaker2]: First we learn an ensemble method and then we try to generate images or add noise in such a way that this criteria is maintained and then we do display based upon those noisy images.
+[00:28:10] [Speaker1]: Yeah that would be interesting yes could be probably done like that in the first attempt. Just like what should be the noise network let's call it like that maybe let's what would generate this or add the noise to the images.
+[00:28:30] [Speaker2]: We can expect if we have this kind of noisy data we may need only smaller size than a larger size.
+[00:28:44] [Speaker1]: Sorry.
+[00:28:45] [Speaker2]: Yeah that so if if we have this kind of particular kind of noisy images then we can expect we may get a performance a similar performance with less number of samples of such noisy
+[00:28:57] [Speaker1]: Yes.
+[00:28:57] [Speaker2]: images.
+[00:29:01] [Speaker1]: Yeah that would be the idea I guess.
+[00:29:03] [Speaker2]: Which can of course improve the training time right?
+[00:29:06] [Speaker1]: Yeah.
+[00:29:07] [Speaker2]: Yeah. Overall training time can be improved. Okay so we can explore that data again. Then then maybe we can move to Anusha now.
+[00:29:31] [Speaker1]: Okay.

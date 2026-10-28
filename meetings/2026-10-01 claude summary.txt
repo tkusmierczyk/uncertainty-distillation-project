@@ -1,0 +1,47 @@
+**Overview**
+
+Sajit presented results for Ensemble Distribution Distillation (EnD²) on CIFAR-10. The teacher is an ensemble of 10 models trained on CIFAR-10. Students were distilled on a transfer set with a fixed total of 50,000 samples, split between in-distribution (ID) CIFAR-10 images and an auxiliary set. The auxiliary set was either real out-of-distribution (OOD) data (CIFAR-100) or synthetic noise applied to CIFAR-10 images. Within this fixed budget there is a clear trade-off: more ID data improves accuracy, and more CIFAR-100 auxiliary data improves expected calibration error (ECE). Noise-based auxiliary data does not reproduce the calibration gain. The best noise type, patch shuffle L1, beat the other noises but was no better than the ID-only EnD² baseline.
+
+Srijith questioned the fixed-budget design. He argued that the original EnD²+AUX gains came from adding auxiliary data on top of the full ID set, so ID should be held constant while the auxiliary set grows. Tomasz explained that the fixed budget was meant to test whether the EnD²+AUX improvement comes from the auxiliary information itself or simply from having more data. The group agreed on a new experiment: keep all 50,000 ID images and scale the noisy set from 50k to 200k, first for each noise type separately and then for a mixture.
+
+**Setup as presented**
+
+The student is trained with the standard EnD² loss. This loss is the negative log-likelihood (NLL) of the ensemble members' categorical predictions under the student's Dirichlet output. ID and auxiliary samples share this single loss term with no separate weighting.
+
+The noise types were:
+- Gaussian noise with σ = 0.5 and σ = 2
+- Salt-and-pepper noise at 0.3
+- Patch shuffle L1: the image is cut into a 2×2 grid and the four patches are shuffled randomly
+- Patch shuffle L2: the same with a 4×4 grid (16 patches)
+
+ID/auxiliary splits of 95/5, 70/30 and 50/50 were tried. The summary tables reported only the best split per noise type, and "best" was chosen on OOD-detection performance, not accuracy or ECE.
+
+**Results discussed**
+
+*Teacher vs. student (Table 3).* EnD² on ID data alone does not match the teacher, especially on ECE, so calibration is not fully transferred. Adding CIFAR-100 as auxiliary data improves ECE. Using noise as the auxiliary data does not. Tomasz also noted that student results had not been shown next to the teacher's, which makes it hard to judge how much is lost in transfer.
+
+*Fixed-budget sweep with CIFAR-100.* Accuracy rises with the ID share and ECE improves with the auxiliary share, giving the trade-off described above. Tomasz's reading was that adding auxiliary data effectively raises the budget. If auxiliary data were unlimited, the question becomes how far that can be pushed.
+
+*Salt-and-pepper sweep.* More ID data helped accuracy, but more noisy data left ECE essentially flat. CIFAR-100 does not behave this way.
+
+*All noise types at a 50/50 split (25k ID + 25k auxiliary).* Among the noise variants, patch shuffle L1 gave the lowest error, ECE and NLL. Tomasz pointed out two caveats:
+- A 2×2 shuffle is a very mild modification of the image.
+- It still did not outperform the ID-only EnD² baseline.
+
+On noise strength, Sajit reported that Gaussian σ = 2 produced higher predictive entropy but lower accuracy than σ = 0.5, which was better on both uncertainty and error. Srijith concluded that small amounts of noise work better than heavy noise.
+
+*Loss function.* Srijith raised two alternatives:
+- Separate loss terms for ID and noise, with a down-weighted noise term. Tomasz noted this is roughly equivalent to using fewer noisy samples, so it still sits in the fixed-budget regime.
+- A KL-divergence-based loss. Sajit has followed only the original EnD² paper. He knows of a later paper with a different, MAP-style (maximum a posteriori) loss but has not tried it.
+
+**Agreed next steps**
+
+1. Fix ID at the full 50,000 CIFAR-10 images. Add 50k, 100k, 150k and 200k noisy samples, separately for patch shuffle L1 and Gaussian σ = 0.5. Generate multiple random noisy copies per image as needed; Sajit had assumed one copy per image, and Tomasz clarified this is not required. The goals are to see whether gains saturate, whether too much noise eventually hurts ID performance, and whether the two noise types behave the same.
+2. Then repeat the scaling with a mixed noisy set, half Gaussian and half patch shuffle L1. Each noise type goes on separate images; noises are not stacked on the same image. Mixing noise types within one image was left as a possible later experiment.
+3. Report student results side by side with the teacher.
+
+**Points worth watching (my read, not raised in the meeting)**
+
+The scaling experiment needs a matching EnD² + CIFAR-100 arm at the same increased budgets. Without it, noise and real auxiliary data cannot be compared on equal terms. Also, choosing the "best" split per noise type by OOD detection may bias the tables against accuracy and ECE.
+
+Note on the transcript: the speaker labels swap partway through, around 00:21 and again from 00:27, so I attributed statements by content. "C410", "C4100" and "E and D square" in the transcript are CIFAR-10, CIFAR-100 and EnD².

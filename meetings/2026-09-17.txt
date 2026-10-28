@@ -1,0 +1,160 @@
+[00:00:20] c0:spk:0: So is my screen visible? Okay. So last time seeing the paper like I had experimented on that paper using that different loss function which didn't work. And then I followed the paper's approach for out of distribution data as well they had distilled the
+[00:00:45] c0:spk:1: Sir you cannot didn't work. You need to have a proper why didn't work? You cannot just say that it didn't work. There will be lot of work there will be lot of issues in the way we will be calling so things everything eventually works out we need to fix the bug we need to fix the issue. So you see you didn't work then say that didn't work it will be just a issue from your side because of that it worked. You may have to fix that issue and make it.
+[00:01:18] c0:spk:0: Okay.
+[00:01:21] c0:spk:1: But anyway this is in general that is that is the that will be the case. Whatever we code may not work at first time you will be know things to make things.
+[00:01:36] c0:spk:0: Yes sir but in the last discussion decided finally that we like Thanks.
+[00:01:45] c0:spk:1: You have to come back to that and so you cannot conclude that this one that it didn't work.
+[00:01:51] c0:spk:0: Okay yes sir. But this week I experimented like using their approach of using out of distribution data where they displayed their data as an like creating those different categorical for out of distribution data. And trying the student on both distribution and out of distribution like auxiliary data if you can see the fourth column in E N D square plus auxiliary this is what I had used it where they four cipher 10 data set they used it cipher 100 at order as out of distribution data set. And similarly four cipher 100 they used cipher 10. And it worked it give give better accuracy and better out of over the results.
+[00:02:31] c0:spk:1: You said can you repeat everything thoroughly and with proper introduction?
+[00:02:43] c0:spk:0: Sir in this paper they had used like done the distillation where they created first transfer data set. And the student they first created the transfer data set from teacher model. They like they passed training data set through teacher model and through each member of the teacher when where they got different categorical for each sample and student was shown the sample and these categorical where the student could learn their distribution over these categorical. And based on that it will show just uncertainty high and low based on whether the this sample is in distribution or out of distribution. In distribution data set is the transfer set will have the categorical which will be very close to each other but for out of distribution data set data set will create their categorical from different features they will be very diverse because the teachers will disagree on out of distribution data sets. So the student was trained on both of these both of these data sets where for it will have a and for out of it will have this flat In the last meeting we had used this in distribution data set at the distillation process only where we got the results which which we can see in the third column of the table. But this this week the out of distribution data as well which the paper had also used and these are the results in the fourth column and I tried the experiment instead of using like actual O D data set I created some noisy versions of the distribution data set and tried the experiments on those data as well. But in the final column. And this noisy version didn't seem to as well as the actual out of distribution data set.
+[00:04:40] c0:spk:1: You should actually having multiple results with multiple
+[00:04:43] c0:spk:0: Yes sir I tried multiple around eight 10 different types of noisy versions but here I have and the one that got the best results.
+[00:04:53] c0:spk:1: Okay.
+[00:04:54] c0:spk:0: Yes sir. This was all that I had done this week.
+[00:05:11] c0:spk:1: Oh sir each of these let's say How we interpret each of these results and let's say?
+[00:05:23] c0:spk:0: Yes sir these are like if if we see first metric it is error rate like the one minus classification accuracy. For the E N D like simple distillation when we distilled on the in distribution data only there was 8.3 %. But when we used it this auxiliary data set along with the in distribution the error rate improved like it goes reduced to 7.4. But when we used it this parameters it was better result in this auxiliary version. And similarly if we see this out of distribution results O D results as well. This auxiliary like when we use the actual O D data set at training time it is giving better results as compared to when we train only distillation data or when we train noisy version of instead of the What sir? What is the second Second row is prediction rejection ratio it is basically higher better this is what I want.
+[00:06:27] c0:spk:1: So what is the time to release it's time to
+[00:06:30] c0:spk:0: It is trying to reject the low confidence sample something like that I didn't go through it properly but according to This metric is basically it is higher the better. This is what I want.
+[00:06:55] c0:spk:1: But what is it actually?
+[00:07:07] c0:spk:0: It is something like how well it is able to reject the low confidence sample this is what I have on this
+[00:07:15] c0:spk:2: I think this this the the table four works like that so we have test set which consists of in distribution and out of distribution and for each of the sample we get uncertainty score meaning entropy. And this score is either based on the total entropy or this epistemic uncertainty. And when we like rank the in distribution out of distribution we can draw this curve where we basically ever like measure the separation and then we can calculate the area under the curve. That's
+[00:08:08] c0:spk:0: So which of these columns shows the results without any distillation just using the student model but without any additional distillation okay maybe you know consume only in distribution data. That is Yes sir square is the yes in distribution data set. E N D is simple distillation where we simply distill the mean not the actual distribution. Sir what was the E N D data here we only distill the actual mean not the separate out the categorical we simply find the mean of those categorical we simply distill that. That is E N D square we the student has the actual categorical from all the teachers not just the mean so it is able to detect the variance like spread between those categorical as well.
+[00:09:20] c0:spk:2: Okay I have an experiment to propose. So it seems that adding this auxiliary data actually seemed to help. It's just I'm the like both in all the like quality on the in distribution out of distribution data. Well the noise doesn't seem to work very well so it's probably somehow like we we should think a bit more about design of the noise. But I'm just wondering if this the whole effect is just based on the data size so when we do perform distillation using this E N D squared we use just in training in distribution data to for distillation. When we do E N D squared plus auxiliary we actually use way more data for distillation right?
+[00:10:25] c0:spk:0: Yes sir. Here we use out of distribution data as well for distillation.
+[00:10:29] c0:spk:2: Yeah so I'm just wondering what would happen if we used just the same amount of data so when we do perform the distillation for with E N D squared plus A U this auxiliary data what would happen if we use just the same number of samples as we used for the E N D squared?
+[00:10:56] c0:spk:0: Okay.
+[00:10:57] c0:spk:2: Does this make sense what do you think?
+[00:11:06] c0:spk:0: Sir tell me what is the ratio what is the number of auxiliary samples and what is the in distribution data this mean in distribution it is for 10 years the auxiliary I had used the cipher 100 data set. Like so the auxiliary is much larger than the Yes sir the So the auxiliary things only because it has it because you have a very large number of auxiliary data.
+[00:11:44] c0:spk:1: Okay yes sir that would be
+[00:11:51] c0:spk:0: I was I'm also wondering why E N D is performing better than Uh did this not supposed to work better than E N D square right?
+[00:12:22] c0:spk:1: Okay yes true.
+[00:12:26] c0:spk:2: Uh sorry I got disconnected for a second could you repeat the last conclusion?
+[00:12:33] c0:spk:0: So okay one conclusion was that E N D square plus using less number of out of distribution data number two A U X it is using probably much larger out of distribution data.
+[00:12:50] c0:spk:2: Okay.
+[00:12:51] c0:spk:0: Second thing why E N D is better than E N D square? It is supposed to and what we are E N D square is supposed to perform right?
+[00:13:11] c0:spk:2: Uh you mean it is performing better on the in distribution data right not out of distribution data.
+[00:13:21] c0:spk:0: T R R is T R R is I think I consider some out of distribution data right so T R R but we expect the other one.
+[00:13:41] c0:spk:2: Well Yeah in theory it should be slightly better for E N D squared I guess but I mean or at least not worse in terms of in distribution data.
+[00:13:56] c0:spk:0: So in terms of accuracy or out of distribution detection you're talking about.
+[00:14:01] c0:spk:2: Uh for out of distribution I would expect better for E N D squared for in distribution at least not worse. Right?
+[00:14:16] c0:spk:0: Yeah.
+[00:14:24] c0:spk:1: Sir in the paper also these accuracy results are better for E N D compared to E N D square.
+[00:14:29] c0:spk:0: And what was their reasoning? So suppose 10 what is the four table four is for table four table four is for out of distribution detection like the out of values the model is getting for different different models and we train on different data sets. O D okay out of distribution detection.
+[00:16:43] c0:spk:1: Yes sir.
+[00:16:44] c0:spk:0: Okay O D is What was the in distribution support set? In distribution set was cipher 10 here on.
+[00:17:34] c0:spk:1: So for E N D for some it is not strong right is it like still running or not available then the normal uncertainty is not available?
+[00:17:48] c0:spk:0: It is not available for E N D that is what they had mentioned in the paper that they are not able to calculate this knowledge uncertainty. Because there is no like there is no way they can determine how the model is behave on the different samples like how the model is agree or disagree on the input samples because they have no categorical for different they have just the mean categorical like in E N D square they have different categorical from each teacher member. But in E N D they have just the mean so there was no way they can determine how the different models disagree.
+[00:18:57] c0:spk:1: So here what did you use for A U X is cipher 100 yes sir.
+[00:19:27] c0:spk:2: So basically the noise we use is just a Gaussian noise.
+[00:19:30] c0:spk:0: Yes sir Gaussian noise.
+[00:19:34] c0:spk:2: Okay and when we do Gaussian noise okay so we basically add Gaussian noise to the training when distillation but we do preserve and then we take train on the labels produced by the teacher right that's
+[00:19:53] c0:spk:0: Yes sir.
+[00:19:54] c0:spk:2: Um but have we even measured how much increase in uncertainty in the predictions of the teacher there is when adding this noise to the to the model.
+[00:20:16] c0:spk:0: Like I first tested this noise on the teacher model like like on the student model like E N D square model where we had just trained on it on the in distribution data first I tested this noisy version on this model and these are the out of values I got on it. Like for cipher 10 I got total uncertainty out of 96 and knowledge uncertainty out of 98.
+[00:20:41] c0:spk:2: Uh wait wait wait slowly slowly so this is but what is the okay so you say that when you add the noise
+[00:20:52] c0:spk:0: your you
+[00:20:57] c0:spk:2: Uh well well but what what what is the value of the uncertainty on the teachers that's what I'm asking about. Like on and how does this compare?
+[00:21:12] c0:spk:0: Major information uncertainty on the teacher is handsome handsome is basically the enter uncertainty.
+[00:21:20] c0:spk:2: Yeah but this is I guess on the in distribution data and I'm asking about out of distribution date or actually I'm asking about the noisy data so
+[00:21:29] c0:spk:0: noisy data.
+[00:21:30] c0:spk:2: if we push just the noisy data through the teachers through the teacher ensemble okay uh what how how does it behave does it tell us that it does it consider this noisy data somehow uncertain or is just like considering is the same as in distribution data. And because I mean one idea that we could do is actually we could try to learn how to add the noise to the in distribution data to maximize flatness of the categorical predictions of this teachers.
+[00:22:13] c0:spk:0: Yes sir.
+[00:22:13] c0:spk:2: That's one idea but first I would like to see really is what's happening here with the with the noise added to the like is the teacher thinking that this is an out of distribution slash uncertain data it's getting or maybe it's just considering the same as in distribution data.
+[00:22:41] c0:spk:1: Yeah that's correct so first I think we need to get these uh uncertainty values.
+[00:22:48] c0:spk:0: Yes sir.
+[00:22:50] c0:spk:1: For in distillation from teacher from teacher the ensemble model for in distribution data that is the support set. And then for auxiliary data there is and then for the noisy in distribution data.
+[00:23:05] c0:spk:2: Yes sir. So um do we have a plan for the next time or
+[00:24:51] c0:spk:1: all the planning of the first screen is what we just discussed now and possibly the suggestion possibly to get those results.
+[00:25:06] c0:spk:2: Uh how about this experiment where we actually try to fix the data size like when this when this performing distillation so that all the E N D squared and E N D squared plus auxiliary used the same amount of data.
+[00:25:27] c0:spk:1: Yes sir I will do that.
+[00:25:32] c0:spk:2: Okay.
+[00:25:48] c0:spk:3: Hello Hello sir.
+[00:25:51] c0:spk:2: Yeah I'm here we lost Srigit for some reason let's wait and if he reconnects but I guess oh yes so so should we move to Anushta?
+[00:26:34] c0:spk:1: Hello Anushta can you hear us?
+[00:26:37] c0:spk:3: Yes sir I can hear you. Should I can I share my screen?
+[00:26:45] c0:spk:1: Sure yes.
+[00:27:04] c0:spk:3: So sir thus and maybe I will start with the like my pipeline that I followed. So here I am using the Bayesian ensemble learning method. And for that I have taken a Samsung data set which is of 19,000 size including the validation and testing data set. And for and I have given four different templates like to generate a summary from this dialogue and all thing. And for the teacher model I am using the menstrual 7 B instruct and then calculating the weights and using both the ensemble prediction like P R E X which is token wise calculations and entropy calculation and then E X P R which is sequence wise entropy calculation. So these are the raw uncertainty score that I got. And
+[00:27:58] c1:spk:0: Here it is for 1500 samples for four epochs right now and four prompts. But I didn't see a much good result as for for the initial and laplace. ID shows the in distribution which is the Samsung data set. Dialogue sum is the OOD and shuffled one is where we are just shuffling some of the words of the Samsung data sets. And this epistemic is API is an epistemic and ALE is aleatoric. So for Softmax it's okay like as far as before. But for delicia it's not that much
+[00:28:48] c1:spk:1: Wait these are students right?
+[00:28:51] c1:spk:0: These are the raw scores yes raw and uncertainty scores.
+[00:28:55] c1:spk:1: Okay but those are students distilled students.
+[00:29:00] c1:spk:0: Sorry?
+[00:29:00] c1:spk:1: These are distilled students scores right?
+[00:29:05] c1:spk:0: Yes.
+[00:29:08] c1:spk:1: Okay do we have like reference scores for the teacher?
+[00:29:19] c1:spk:0: Just a second sir I will just connect to my desktop. No sir no no no no no this time no. Actually sir is asking me to show the teacher results and that is in my desktop oh my my So these are the raw uncertainty score that I got but there is not that much change as I observed from the last meeting values. Uh but there is a change in the oracle values. These are the RX scores. RX for dialogues These are these in term teacher? Yes ID versus OOD distribution. Yes. So for initially if that dialogue sum data set comes they're showing means we can assume not we can assume but we can say it is able to get that there is a change in the data like the epistemic uncertainty. But for using PREX is very less means these are not good actually. Unless this is seems fine. Keeping a threshold of above 0.5 will be more good.
+[00:32:25] c1:spk:2: So dialogue sum is totally different.
+[00:32:30] c1:spk:0: Uh but it looks like it is not it looks like the model is pretty dialogue sum is more well shuffled ID is actually an out of distribution.
+[00:32:44] c1:spk:2: This is
+[00:32:45] c1:spk:0: Yeah yes yes. Oh sir uh
+[00:32:52] c1:spk:1: I I I have a question. Uh so this is area under ROC curve where uh isn't it that's like uh it's a binary kind of problem because this is out of distribution detection. So random random random results is basically 50% so 0.5 right?
+[00:33:20] c1:spk:0: Right right both zero and one yeah probability yeah.
+[00:33:24] c1:spk:1: And like for dialogue sum we get basically even like below 0.5 results.
+[00:33:33] c1:spk:0: Right.
+[00:33:34] c1:spk:1: Uh this means that shouldn't the labels be swapped or also
+[00:33:40] c1:spk:0: Inverted kind of thing.
+[00:33:42] c1:spk:1: Yeah yeah and dialogue sum is it's not handling it this data set at all I mean it's not able to detect or what's the how what's what what is here I don't I mean getting exactly what we are looking at.
+[00:34:02] c1:spk:2: Now it looks to me that the dialogue sum is very similar to at least from some of these models that would be the dialogue is very similar to the in distribution like that. And it is not able to differentiate these two. While shuffling ID is keeping as more like an out of distribution data is not able to distinguish between them.
+[00:34:26] c1:spk:1: All right.
+[00:34:28] c1:spk:0: Sir one thing I want to like I have like last week I presented one table where we have the uncertainty score that I have mentioned the oracle. Uh but I think that can be useful if we are if you totally want to see how the aleatoric or epistemic is affecting the total all uncertainty. So basically this is different from this raw score that is different from this raw scores. That is by calculating scoring the samples and then calculating the EURSE kind of thing. But there is some issue I'm not able to connect right now. Hello.
+[00:36:14] c1:spk:2: Uh hello Anushka.
+[00:36:15] c1:spk:0: Hello yes sir am I audible?
+[00:36:18] c1:spk:2: Uh so are you completing that PREX value and next PREX value directly somewhere like that raw values is it there in the table?
+[00:36:28] c1:spk:0: Yes it is there. Just a second sir. You're talking about that last table or the recent one that I showed right now.
+[00:36:41] c1:spk:2: Uh whatever whatever you show this EURSE value right?
+[00:36:44] c1:spk:0: Uh right now I showed the EURSE right.
+[00:36:48] c1:spk:2: Okay actually PREX problem right. Yeah just a second. And share this. So how is the PREX value or the EURSE value?
+[00:37:27] c1:spk:0: These are the PREX these are the total row raw raw values raw entropy values.
+[00:37:35] c1:spk:2: Okay. And again we can see that the shuffled one which means and even even if you look at software it is being shuffled as uh out of distribution and hence uh and I PREX. Okay PREX Okay PREX So that passing the uncertainty right?
+[00:37:58] c1:spk:0: Okay. Uh These are the uncertainty raw and uncertainty scores.
+[00:38:20] c1:spk:2: And again the shuffled one
+[00:38:22] c1:spk:0: Uh
+[00:38:25] c1:spk:2: This is for Are you Okay this is for Softmax. These are high. As compared to yes of course yeah. To dialogue sum. Uh but but then these are not state values right these are like what students have learned right?
+[00:40:12] c1:spk:0: Yeah what student have learned. Teacher or metric I I need to find that to my sir also told just now.
+[00:40:23] c1:spk:2: Sure sure.
+[00:40:37] c1:spk:0: Sir I feel uh maybe one of the reason is maybe huh because to increase more sample. Uh but what I was thinking is uh because the raw raw scores I don't think it is that much beneficial like for right right now because for calculating the further experimentation it is beneficial. Uh because even in in you can see that for epistemic it is that the values are very less. 0.0 and 0.1 kind of so basically it is not able to distinguish whether a new data set has come or not. Uh there is a change in the distribution data distribution kind of thing.
+[00:41:43] c1:spk:1: Uh could you remind me how this students were distilled? What strategy like just so this is this on the in training data using this either PRX or XPR right?
+[00:42:00] c1:spk:0: On
+[00:42:00] c1:spk:3: Yes PR PRX for the token level and EXPR for the sequence level.
+[00:42:06] c1:spk:1: Right and this was just distillation on the in distribution data.
+[00:42:10] c1:spk:0: The in distribution data yes. Teacher model. Uh sorry Samsung data set. For Softmax I have used that cross entropy loss and scale averages
+[00:42:23] c1:spk:1: Uh
+[00:42:23] c1:spk:0: for calculation. And for the delicia it's just evidential loss that we use with alpha. And laplace is a distribution laplace distribution with change in the weight that theta weights that I'm considering right now.
+[00:42:40] c1:spk:1: Okay um so I'm just because on the Softmax actually there is some kind of this difference between in distribution and the out of distribution and shuffled right?
+[00:42:52] c1:spk:0: Yeah it is there is a increase.
+[00:42:55] c1:spk:1: Yeah it's just the question is whether this increase for dialogue sum is meaningful because it seems rather small. And also for the shuffled it is actually large.
+[00:43:10] c1:spk:0: Um
+[00:43:13] c1:spk:1: But it's just for the Softmax and for other models actually it doesn't seem to like
+[00:43:20] c1:spk:0: major change kind of thing.
+[00:43:22] c1:spk:1: Sorry?
+[00:43:24] c1:spk:0: Uh for other models it's not a major change as compared to Softmax. Like for delicia and laplace there is a change of minute minute numbers only 4.4 and 4.46 to 4.47 only.
+[00:43:37] c1:spk:1: Yeah I'm just wondering if it's a question of fitting are this do we have are we sure that these models are properly trained because um have you used like uh yeah are we sure that these are properly trained?
+[00:43:55] c1:spk:0: Yes sir I have trained.
+[00:43:58] c1:spk:1: Yeah yeah but how have you been like following any diagnostics on the training?
+[00:44:07] c1:spk:0: Right uh
+[00:44:09] c1:spk:1: I mean because even
+[00:44:11] c1:spk:0: I was keeping the look on the loss values after every epoch. For for all the like student models.
+[00:44:22] c1:spk:1: Okay so we know that they are converged that's what you are saying.
+[00:44:27] c1:spk:0: Right right.
+[00:44:33] c1:spk:1: Uh but how about like all the hyper parameters in the training and all that?
+[00:44:39] c1:spk:0: Uh hyper parameter fine tuning I haven't done. It just like the initial after last meeting like changes this is the initial result hyper parameter tuning I need to do.
+[00:44:53] c1:spk:1: Yeah I'm just wondering because I mean if we look on the in distribution scores Softmax versus laplace there is a huge gap between these two.
+[00:45:03] c1:spk:0: Right.
+[00:45:05] c1:spk:1: And I'm just wondering like are these model that much worse really?
+[00:45:15] c1:spk:0: Uh so for example what was the initial uh let's say if you before training if you could measure before training the this this this values on the on this data okay. Just just to see really if this is any of how like different after training.
+[00:45:37] c1:spk:1: Yes yes.
+[00:45:37] c1:spk:0: Is the model really like has the have the models learned anything because uh like like with this gap I I'm I I'm I and without any reference I I'm not able to even tell if this learned anything or just maybe just we are looking on some noise.
+[00:45:55] c1:spk:1: Okay okay I will do that Shanti. And maybe present in the next meeting the values. Sir also one more thing if we target for delicia laplace like as far as I was reading with the papers. So in case of some new data set the epistemic value should be higher for delicia and for laplace the aleatoric should be higher. Thus it is a fundamental kind of thing or it can vary?
+[00:46:30] c1:spk:0: I'm not sure if I know about such a property I don't think it's any fundamental and I mean I don't maybe we it is I don't know really I would have to think more about like how the training is performed but I don't think it it is like any general rule or there can be such a rule.
+[00:46:56] c1:spk:1: Okay.
+[00:46:56] c1:spk:0: I mean it uh it would mean just that for some reason the laplace model is way better model for this kind of data.
+[00:47:12] c1:spk:1: Um
+[00:47:12] c1:spk:0: That would be the implication from what you just said right?
+[00:47:16] c1:spk:1: Yes yes.
+[00:47:16] c1:spk:0: But if it is like that then we should just follow with this model.
+[00:47:22] c1:spk:1: Um Uh should we conclude that that?
+[00:48:59] c1:spk:0: Yeah sure sir.
+[00:49:01] c1:spk:1: So let's try to first have the references values in the form of the teacher's course and in the form of the pre-training scores and then maybe we can get back to trying to interpret what's happening in this table okay.
+[00:49:17] c1:spk:0: Yeah sure sir. Sorry sir your voice is fluctuating. No it's not like we are trying to concluding but usually the laplace model works better for this kind of generational facts it was We're not trying to conclude any particular model that it will work good. Right right. Okay. Sure I will look into it again sir. Maybe let's see. Okay then. Sure sir. Yeah Thank you sir.
+[00:51:04] c1:spk:1: Thank you bye bye.
+[00:51:05] c1:spk:0: Thank you.

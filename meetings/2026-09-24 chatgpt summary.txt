@@ -1,0 +1,256 @@
+# Meeting summary
+
+Participants: Professors Tomasz and Srijth; students Sajid and Anushta. The speaker labels in the transcription are inconsistent, so the summary uses the participant names provided in the request and the research topics discussed.
+
+The meeting covered two research projects: Sajid's knowledge distillation and out-of-distribution (OOD) detection experiments, followed by Anushta's uncertainty estimation experiments. The main outcome was to investigate discrepancies in the current results, improve experimental controls, and prepare clearer, more complete comparisons for the next meeting.
+
+## 1. Sajid — Knowledge distillation and OOD detection
+
+### Initial status
+
+The previous meeting had established that adding auxiliary OOD data appeared to improve the student model's OOD detection performance, whereas adding noisy data did not. The open questions were whether the improvement came from having more training data or from the type of data itself, and how the teacher's uncertainty estimates related to the student's performance.
+
+Sajid presented updated experiments comparing:
+
+* In-distribution (ID) only: CIFAR-10.
+
+* ID + auxiliary OOD data: CIFAR-10 and CIFAR-100.
+
+* ID + noisy data: CIFAR-10 with added noise.
+
+The original CIFAR-10 and CIFAR-100 training sets each contained 50,000 samples. The experiments also included equal-budget variants in which the total distillation dataset size was held fixed at 50,000 samples.
+
+The evaluation covered two aspects:
+
+1. CIFAR-10 test accuracy, measuring the student's ID classification performance.
+
+2. OOD detection performance, using AUROC on OOD datasets such as LSUN and Tiny ImageNet.
+
+### What was discussed
+
+A. Controlling for the amount of training data
+
+The earlier experiments used 50,000 ID samples and 50,000 auxiliary samples, giving the auxiliary-data condition twice the total number of training samples compared with the ID-only baseline.
+
+The professors emphasized that this comparison confounds two effects: the amount of data and its composition. The equal-budget experiments were therefore needed to isolate the effect of replacing some ID samples with auxiliary or noisy samples.
+
+The results suggested a trade-off:
+
+* Using more data, including auxiliary OOD data, improved ID accuracy in the earlier experiments.
+
+* Under a fixed data budget, replacing some ID samples with auxiliary OOD data reduced ID accuracy but appeared to improve OOD detection.
+
+* The noisy-data condition did not show the same useful OOD detection improvement.
+
+The appropriate balance between ID and auxiliary data remains an open question.
+
+B. Teacher uncertainty versus student performance
+
+Sajid presented entropy measurements for the teacher model trained on CIFAR-10. These indicated that noisy inputs could produce high uncertainty and strong OOD-related scores.
+
+However, the student experiments did not show the expected corresponding improvement in OOD detection. The professors highlighted this discrepancy: noisy samples appeared useful according to the teacher's uncertainty measurements, yet distilling from them did not yield comparable student performance.
+
+Student entropy measurements had not yet been computed, preventing a direct comparison of uncertainty before and after distillation.
+
+C. Noise generation and implementation
+
+The existing noisy samples were created by adding Gaussian noise to ID images. Sajid had also tested other noise configurations, including salt-and-pepper noise, but these did not improve the results.
+
+The group reviewed how the noisy data were passed into the distillation pipeline and how the data source was selected through command-line arguments. The discussion did not establish a definite implementation error or explain the discrepancy.
+
+The professors suggested that pixel-level noise might not be the most useful form of synthetic OOD data. They proposed testing structural perturbations, such as dividing an image into a 4×44 \times 44×4 grid and randomly shuffling the tiles.
+
+They also discussed varying the proportions of ID and auxiliary/noisy samples to understand how the composition of the distillation data affects the student.
+
+### Planned actions
+
+1. Compute entropy scores for the student models
+
+Evaluate the student on ID, genuine OOD, and noisy data. Compare student entropy with the corresponding teacher measurements to determine what uncertainty information is transferred during distillation.
+
+Owner: Sajid
+
+2. Test different ID/OOD proportions
+
+Vary the composition of the fixed distillation data budget, including configurations such as 75% ID / 25% auxiliary data and 90% ID / 10% auxiliary data. Examine the effects on both ID accuracy and OOD detection.
+
+Owner: Sajid
+
+3. Investigate alternative noise generation methods
+
+Test structural noise, specifically image-tile shuffling, in addition to the previously tested pixel-level noise methods. Share a consolidated spreadsheet of the existing noise experiments, using the available JSON results.
+
+Owner: Sajid
+
+4. Explore noise magnitude
+
+Sajid additionally proposed varying the noise level, for example using 5%, 10%, and 15% noise, and measuring how performance changes. The precise definition of these levels was not clarified in the meeting.
+
+Owner: Sajid; proposed follow-up experiment
+
+### Conclusions for Sajid's project
+
+The meeting established three research questions to pursue:
+
+* Data-budget trade-off: How should a fixed distillation budget be divided between ID and OOD data?
+
+* Noise quality: Which synthetic perturbations provide useful training information rather than merely increasing teacher uncertainty?
+
+* Uncertainty transfer: Why does the teacher assign high uncertainty to noisy inputs without a corresponding benefit in student OOD detection?
+
+No final explanation was reached. The next step is to conduct the planned experiments and use matched teacher/student measurements to identify where the discrepancy arises.
+
+## 2. Anushta — Uncertainty estimation and entropy experiments
+
+### Initial status
+
+Anushta reported progress on fixing two earlier issues:
+
+* The inversion problem in the previous results had been addressed.
+
+* Results before and after training had been added.
+
+However, the experiments still had unresolved issues:
+
+* The OOD dataset being used appeared potentially unsuitable or incorrectly configured, so Anushta planned to replace it with another dataset.
+
+* Some results used an exponential function to calculate the Dirichlet concentration parameters α\alphaα, while a softmax-based approach with regularization was being run separately.
+
+* The softmax and Laplace-related experiments were not all complete.
+
+* Loss curves had not been plotted.
+
+The discussion focused on whether the observed uncertainty values were consistent with what should happen during training.
+
+### What was discussed
+
+A. Entropy increased after training on ID data
+
+Anushta showed results in which entropy on ID data increased after training. The group questioned this behaviour because the intended model should generally become more confident on the training distribution as it learns.
+
+The professors asked for the training loss to be plotted over iterations or epochs. The reported results covered only about three epochs, so the learning dynamics were not yet clear.
+
+Possible explanations discussed included:
+
+* An issue in the training procedure or an unintended change to model parameters.
+
+* An issue in the calculation or interpretation of the uncertainty metric.
+
+* An effect related to how the Dirichlet concentration parameters α\alphaα were computed.
+
+The group did not identify the cause. Anushta stated that the metric implementation had been checked, but the training behaviour still required investigation.
+
+B. Teacher and student entropy comparisons
+
+The presented student results included ID data, DialogueSum as OOD data, and a shuffled Samsung dataset. The reported student epistemic entropy values were very small in some cases, approximately 0.004.
+
+The professors noted that the student and teacher results needed to be presented together to make comparisons possible. They also questioned whether the entropy for the teacher was the same on ID and DialogueSum data, while the shuffled dataset produced higher entropy.
+
+The raw scores and entropy measurements needed to be distinguished and checked, and the results needed to be consolidated into a consistent table.
+
+C. Experimental completeness and reporting
+
+Anushta had initially shown only part of the available results, including deletion-related scores, because the other results had not yet been combined into the desired format.
+
+The professors requested a complete overview that would make it possible to understand the experimental setup and compare the teacher and student models directly.
+
+### Planned actions
+
+1. Investigate the unexpected entropy increase
+
+Examine why ID entropy increases after training. Plot the training loss over the course of training and inspect the relevant training procedure, including the calculation of α\alphaα.
+
+Owner: Anushta
+
+2. Complete and verify the experiments
+
+Allow the softmax-based approach with regularization and the remaining Laplace-related experiments to finish. Revisit the OOD dataset choice and verify the entropy and raw-score calculations.
+
+Owner: Anushta
+
+3. Prepare a complete comparison of teacher and student results
+
+Present the teacher and student measurements side by side, including the relevant ID, OOD, and shuffled-data results. Include the different metrics and explain how the experiment was implemented.
+
+Owner: Anushta
+
+4. Share the updated results before the next meeting
+
+Anushta proposed investigating the entropy issue and posting an update by Saturday, after which the experiments could be run again if needed.
+
+Owner: Anushta; Saturday was the proposed update deadline
+
+### Conclusions for Anushta's project
+
+The main conclusion was that the current uncertainty results were not yet sufficiently understood to support firm interpretations. In particular, the unexpected increase in ID entropy after training needed to be explained, and the teacher/student results needed to be made directly comparable.
+
+The next meeting was intended to begin with a reminder of the exact experimental setup and implementation, followed by a review of the consolidated results and a deeper investigation of the remaining issues.
+
+## 3. Overall meeting outcome
+
+|
+Topic
+
+|
+
+Status at the end of the meeting
+
+|
+| --- | --- |
+|
+
+Sajid: auxiliary OOD data
+
+|
+
+Appears to improve OOD detection, with a potential trade-off against ID accuracy under a fixed data budget.
+
+|
+|
+
+Sajid: noisy data
+
+|
+
+Teacher uncertainty is high, but the student does not show the expected benefit. The cause remains unresolved.
+
+|
+|
+
+Sajid: next experiments
+
+|
+
+Compare teacher/student entropy, vary data proportions, and test structural noise and other perturbations.
+
+|
+|
+
+Anushta: training behaviour
+
+|
+
+ID entropy increases after training; the reason is unknown. Loss curves and training behaviour need investigation.
+
+|
+|
+
+Anushta: uncertainty results
+
+|
+
+Teacher/student comparisons and metric reporting are incomplete and need consolidation.
+
+|
+|
+
+Next meeting
+
+|
+
+Planned for the following Thursday, with Anushta presenting first.
+
+|
+
+Overall conclusion: Neither project reached a definitive scientific conclusion during this meeting. The discussion primarily clarified experimental confounders, identified inconsistencies between measured uncertainty and downstream performance, and established concrete experiments and reporting improvements for the next meeting.
+

@@ -1,0 +1,180 @@
+[00:16:53] [Speaker1]: Hello Um Okay Can you hear me and How about Srijit Can you hear us
+[00:00:32] [Speaker2]: Hello can you hear me
+[00:00:33] [Speaker1]: Yes Okay I guess then we can start
+[00:00:38] [Speaker2]: Yeah sure let's share my screen So I'm starting with the raw uncertainty scores what I observe is as there is a shift in the data set The raw uncertainty scores are Higher They are
+[00:01:20] [Speaker1]: Uh uh slowly slowly so we have teacher three students right
+[00:01:24] [Speaker2]: So Yeah Teacher and three students and our input data is Samsung which is where the input is some conversation between two people and output is a summary For the dialogue sum it is similar to that but it's a like if we consider the length so it's very small it's like daily conversation like how are you I'm fine kind of thing so the length of the you know length in the dialogues of length in the dialogue of dialogue some data set are much small much lesser than the Samsung data set Then the shuffled one is like I have shuffled some of the words from the input data set which is Samsung And news is is the new domain shift where the input is some article or news related to some news And output is the Human generated summary Within two to three lines So like I started with The started with the uncertainty calculations And what I observe is As We see from this teacher model itself That PRX is calculating via token and sequence level but although there is no that much difference so we can Go without calculating them too So if starting with the Samsung so the teacher uncertainty that I got is 1.13 but Like On on calculating on the old data set it is getting higher 1.22 to 1.49 and 1.66 And if one thing that I observe is Most of these values are totally depend on the data set like the aleatoric one is almost higher as compared to epistemic So I don't know like why it is performing like that but yeah with respect to the Samsung Samsung data this uncertainty uncertainty values are increasing And This softmax values are there and deletion and laplace values for all the data sets But And 1.3 Yes so like The uncertainty values are increasing that why one thing that I observed And it is mostly depend on like the total uncertainty is depending mostly on the aleatoric one not the epistemic These are the two things that I observed here and like figuring out why the epistemic epistemic uncertainty is much smaller In deletion and laplace too 0.03 and 0.04 As compared to teacher
+[00:04:16] [Speaker1]: So basically softmax student reproduces the Total uncertainty numbers compared to the teacher but the other two students increase The values Of the total And also in the aleatoric I guess yeah
+[00:04:39] [Speaker2]: It's higher yes sir in every of the student models To wait basically the total uncertainty is directly proportional to the aleatoric it seems like that From the values 1.25
+[00:05:06] [Speaker1]: Okay and how about like performance on in distribution data like if we compare teacher softmax Dish and laplace like accuracy for example or whatever the metrics we we use
+[00:05:23] [Speaker2]: Okay for the accuracy and Are you talking about the accuracy
+[00:05:29] [Speaker1]: Uh I I will not what what kind of metrics do we have for in distribution data Like apart from like not not the uncertainty metrics but like quality of the answers
+[00:05:44] [Speaker2]: But OAD from our data And raw scores
+[00:05:50] [Speaker1]: Okay So these are like These are what
+[00:06:00] [Speaker2]: Yeah first thing maybe can we look at the raw this is not
+[00:06:05] [Speaker1]: Okay yeah
+[00:06:05] [Speaker2]: Raw raw scores
+[00:06:07] [Speaker1]: Huh these are the raw scores for the quality of the summary
+[00:06:13] [Speaker2]: Generated
+[00:06:13] [Speaker1]: Okay but then
+[00:06:14] [Speaker2]: So I'm on then Yeah laplace is performing closely to the teacher model
+[00:06:22] [Speaker1]: Is it like if you look on the Oral Samsung I I D distribution right Okay teachers gives us 35.87 And then dish like gives us One like this the first one 35.86 so Basically the same thing right
+[00:06:46] [Speaker2]: Uh yes similar yes of course
+[00:06:49] [Speaker1]: Yeah and then
+[00:06:51] [Speaker2]: In distribution
+[00:06:53] [Speaker1]: Yeah and the laplace Roughly the same just order is swapped between the aggregation methods right The yeah we cannot really like all of them they seem to perform Closely or similar on in distribution data right
+[00:07:16] [Speaker2]: Right
+[00:07:17] [Speaker1]: Uh
+[00:07:20] [Speaker2]: So that means Okay The performance is similar but we have better uncertainty modeling capabilities with Dirichlet and laplace isn't
+[00:07:34] [Speaker1]: Right sir
+[00:07:36] [Speaker2]: Uh
+[00:07:37] [Speaker1]: Better than teacher
+[00:07:39] [Speaker2]: Better than teacher That too with a slight 0.2 to 0.3 %
+[00:07:53] [Speaker1]: It depends on the data set right so dialogue sum It's well I think
+[00:08:02] [Speaker2]: It's just normal daily conversation data set Like how are you I'm fine what are you doing yeah I'm doing this this is kind of thing not a long conversation between two people So it's I guess the reason I found is maybe because it's very less in sequence or the sequence words basically words length of the words sorry
+[00:08:29] [Speaker1]: Uh just a question like uh what what are let's say Confidence like how how much how big are the data sets so like what what is the variance in these numbers like are the this basically are the differences meaningful Between the methods like I I don't know let's say if we compare 324.95 on dialogue some out of distribution to 25.4 Uh I mean it there seem to be a trend but for example like laplace Gives us 24.97 which is uh In in one of the results and 25.2
+[00:09:15] [Speaker2]: Yes yes E
+[00:09:16] [Speaker1]: I'm just wondering if there is any Is this like uh meaningful the difference I guess
+[00:09:25] [Speaker2]: So
+[00:09:26] [Speaker1]: Yeah
+[00:09:28] [Speaker2]: Yeah what I observed is the dialogues and data set is almost similar to the Samsung Like the Summary kind of thing means the format is sim similar that in input conversation and then somebody
+[00:09:43] [Speaker1]: Uh okay just a question so these are based on everything is based on rock score
+[00:09:49] [Speaker2]: Yes yes
+[00:09:50] [Speaker1]: And we get better and And we get better rock score on the out of distribution data than using when using teacher
+[00:10:02] [Speaker2]: Not a better it's almost similar maybe so I can observe I can we can say that the generation quality by the student models are good With respect to the teachers Means they have learned properly kind of thing
+[00:10:20] [Speaker1]: Now but how does this work that okay we trained on the Samsung data right
+[00:10:26] [Speaker2]: Yes
+[00:10:27] [Speaker1]: Okay on the Samsung data we get slightly worse in distribution like rock scores right
+[00:10:34] [Speaker2]: Yes
+[00:10:34] [Speaker1]: And then we do take uh something that we haven't trained on and we haven't distilled on right Meaning dialogue sum and news Right
+[00:10:46] [Speaker2]: Yes yes
+[00:10:47] [Speaker1]: Okay and for this distributions we measure rock score Which is I guess a metric of like a quality of the responses
+[00:10:57] [Speaker2]: Huh
+[00:10:58] [Speaker1]: And we get better okay we get uh better results on dialogue sum
+[00:11:06] [Speaker2]: Huh
+[00:11:06] [Speaker1]: And Okay good worse results on news right And you're saying that dialogue sum is just very similar to Samsung right
+[00:11:17] [Speaker2]: Right
+[00:11:17] [Speaker1]: Uh how about news is it similar is it different
+[00:11:22] [Speaker2]: Yeah the input is an article not a conversation between two people
+[00:11:27] [Speaker1]: Okay so this would Mean that basically like real out of distribution data is news right
+[00:11:35] [Speaker2]: Yes
+[00:11:35] [Speaker1]: And then we get worse result there and this is Expected I guess and then then is just the what is surprising is the dialogue sum Results so it's would that's that this this is a bit surprising I guess that would be like an artifact somehow of the process That we Like suddenly get better results on this data set we haven't trained on
+[00:12:05] [Speaker2]: But what I believe is sir maybe the data center Samsung data set that we have trained already there can be chances that there are some there are some words which are similar as in the dialogue sum So that's why it's giving that a near to like close teacher raw score
+[00:12:23] [Speaker1]: Yeah yeah but we get worse on the The in distribution data right so a Samsung we get worse After distillation but on this data set we get better
+[00:12:37] [Speaker2]: Right
+[00:12:43] [Speaker1]: Rock score so just this table we are looking at now So so we get slightly lower lower numbers after the distillation but surprisingly
+[00:12:54] [Speaker2]: I think these numbers I don't know it seems to be similar And not much difference in terms of the performance perhaps I don't know like how many samples and which I have used
+[00:13:05] [Speaker1]: Sir 300 samples only
+[00:13:08] [Speaker2]: Actual test data set contains much larger number of samples right
+[00:13:11] [Speaker1]: Right
+[00:13:13] [Speaker2]: And maybe once I actually use all those test samples maybe we'll maybe be able to see
+[00:13:18] [Speaker1]: Yes there will be a difference yes
+[00:13:21] [Speaker2]: Their understanding of how the performance would look like
+[00:13:25] [Speaker1]: Yeah right now I haven't used all the samples only 2000 for training and 3000 for OAD and raw scores That to those model is very lightweight that point model Once I increase the sample there may be chances that the epistemic data I was telling here it should be also like learning some of the like I was believing like that only Let's see so I need to do that I've already put on that on them
+[00:14:00] [Speaker2]: But teacher also epistemic consultant is not adequate is it
+[00:14:03] [Speaker1]: Yes yes Epistemic is not at all great here sir It's totally dependent on the aleatoric one only the total Uncertainty uncertainty
+[00:14:14] [Speaker2]: Hm hm
+[00:14:15] [Speaker1]: That's uh
+[00:14:15] [Speaker2]: That is one of the issue
+[00:14:17] [Speaker1]: It's similar thing we've seen with Harsha right like the epistemic numbers were really slow and then The boosts were actually coming mostly from aleatoric surprisingly
+[00:14:29] [Speaker2]: Yes
+[00:14:31] [Speaker1]: Hm
+[00:14:32] [Speaker2]: But why is it happening with this teacher model which is actually If some kind of a deviation or not
+[00:14:40] [Speaker1]: Yes
+[00:14:42] [Speaker2]: With I 1 up means sir
+[00:14:44] [Speaker1]: Yes
+[00:14:47] [Speaker2]: So it should be the model the epistemic uncertainty
+[00:14:53] [Speaker1]: Um maybe if I change the model that can be possible But Yeah means that one thing that I am thinking right now And otherwise I don't see any difference maybe
+[00:15:33] [Speaker2]: And these numbers are also from 300 samples or these are like
+[00:15:38] [Speaker1]: Samples only sir 2000 around Samples
+[00:15:44] [Speaker2]: But uh how how how large is the whole data set
+[00:15:48] [Speaker1]: It is the Samsung data set is around 16,347
+[00:16:02] [Speaker2]: Yeah increasing sample definitely improve the performance that I believe so And comparing the OAD too Here also like for dialogue some it's what teacher model is 0.58 and the soft deletion and laplace it's around 0.55 so it's closer to teacher only
+[00:00:32] [Speaker1]: Yeah that's hard to conclude anything from this numbers they are quite I don't see Any pattern here to be honest And I guess it's because the data sets are Too small The test set the number of samples is too small
+[00:00:52] [Speaker2]: Right
+[00:19:20] [Speaker1]: And what is this Samsung R1 and Samsung R2 These are other data sets or what is that and what is R R like
+[00:19:29] [Speaker2]: That R1 that R2 that the comparison of the single word and the comparison of other two consecutive word That is R1 and R2 And RL is the whole sequence kind of thing raw score for the whole length
+[00:19:44] [Speaker1]: Right uh
+[00:19:48] [Speaker2]: That is almost like both the for student and almost similar Not that much difference I also
+[00:19:57] [Speaker1]: Okay Okay do we have anything else or
+[00:20:06] [Speaker2]: Mostly Just a few plots that I have Only the plots I have That's the training that we told And that's it
+[00:20:20] [Speaker1]: Okay maybe then we can Try to see the same basically tables we've seen today on Thursday but just for more samples
+[00:20:29] [Speaker2]: Yeah sure sir
+[00:20:30] [Speaker1]: And then we can get back again and discuss really like what are the differences between methods
+[00:20:40] [Speaker2]: Sure But
+[00:20:44] [Speaker1]: Yeah
+[00:20:44] [Speaker2]: Like So how the usually values like change Well there will be a lot of difference kind of thing that I'm trying to understand Because what I observed from this results and I was understanding analyzing doing the ablation study With respect to the student sorry with respect to the teacher the students are performing well on the metric of tetras scores and auric Because the values are almost Like similar plus minus two 0.2 something like that So what I thought is like the students are learning well that is for sure But That you told that there will be difference what Like I'm not understanding what with respect to what
+[00:21:36] [Speaker1]: I Think that rock scores for out of distribution data should be worse for students than for the Well Should they no not really they Well depends on the distillation but I'm surprised if they got better actually for students than for teacher because there is no reason why they would be better That's one one way I guess
+[00:22:06] [Speaker2]: So means the raw score will be less whenever
+[00:22:11] [Speaker1]: They shouldn't be better at least they'd surprising that they got better for the For the students I Well I that's that's hard to explain why it got better I guess for This dialogue sum
+[00:22:34] [Speaker2]: Okay Dialogue sum is yeah because it has a similar format maybe that's why it's almost similar with the same with respect to the teacher That I believe so
+[00:22:48] [Speaker1]: Uh could we go again to the table two uh I guess
+[00:22:52] [Speaker2]: Sure
+[00:22:59] [Speaker1]: So this is Auric and this is based Auric based on what metric it's based on the total uncertainty Or
+[00:23:11] [Speaker2]: Yes total uncertainty
+[00:23:14] [Speaker1]: Right and could we also get maybe based on the epistemic
+[00:23:21] [Speaker2]: Based on epistemic
+[00:23:31] [Speaker1]: Yeah This
+[00:23:38] [Speaker2]: No for the auric like in the earlier one I decomposed into epistemic and aleatoric for this one I skipped that
+[00:23:50] [Speaker1]: Yeah sorry
+[00:23:52] [Speaker2]: So for auric score in the earlier experiment I decomposed into that aleatoric and epistemic right now I skipped that so maybe I can add in the further runs
+[00:24:04] [Speaker1]: Yeah yeah it's yeah Uh what do you think Srijit Uh In general I guess it this is what we wanted it's just maybe more samples would kind of give us more meaningful numbers
+[00:24:28] [Speaker2]: Yes sure
+[00:24:31] [Speaker3]: Yeah at this point yes we may need to fix this on more Number of data points
+[00:24:37] [Speaker2]: Hm
+[00:24:38] [Speaker3]: Uh But is there some reason why Their entropy is better for students Anything better than teacher
+[00:24:50] [Speaker1]: I I don't I don't think there is a reason but it's again something that we've seen for Harsha's results also right
+[00:24:56] [Speaker2]: Right
+[00:24:58] [Speaker1]: Uh Could we look
+[00:25:00] [Speaker2]: Because of the shift I guess
+[00:25:02] [Speaker1]: Uh could we could we look on the training curves I guess you've had them right just to make sure that Like everything is so this is the distillation curve right Uh
+[00:25:17] [Speaker2]: Just a second sir it's loading Yeah
+[00:25:24] [Speaker1]: Okay so what do we have here like for each uh Now for softmax And for dish like students uh we have distillation loss And then uh validation loss Okay gradient norm and Teacher to student KL divergence Uh Yeah it's Looks Okay what is this learned different precision alpha zero okay that's alpha zero of digital distribution
+[00:26:42] [Speaker2]: Yeah values of performance
+[00:26:48] [Speaker1]: Yeah I guess this looks okay I don't see anything suspicious here
+[00:26:54] [Speaker2]: Okay
+[00:27:07] [Speaker1]: Hm
+[00:27:13] [Speaker2]: When I will like Increase the sample and let's discuss the result on Thursday that would be Good
+[00:27:23] [Speaker1]: Yeah uh one thing we could think is like Uh some experiment trying to understand really if the This uh weird behavior or two two two kind of things we don't fully understand come from so one thing is that Um Why basically all the uncertainty is going coming from aleatoric part and actually even after distillation they most of the increases coming from the aleatoric part that's one thing
+
+[00:27:59] [Speaker1]: And then why actually students behave better or dish or actually all of them they they behave better and not all of the distribution they that than teacher, right? These are the two things we kind of had observed previously also with Harsha's results and still they kind of we observed them here and we don't understand them. So I'm just wondering if there is some kind of like controlled experiment to to to see really what this what could we do to to see why this happens.
+[00:28:39] [Speaker2]: Yeah. And maybe I will go through some of the literature to find out this.
+[00:28:45] [Speaker1]: Yeah, that's one way of doing it, yes.
+[00:28:48] [Speaker2]: Yes.
+[00:28:50] [Speaker4 (Speaker3?)]: But at this point the distillation is only best for in distribution, right?
+[00:28:59] [Speaker2]: Yes. And it is good to see this noisy version seems to have a higher uncertainty.
+[00:29:12] [Speaker1]: Yeah, noisy version maybe what I observed is if there is a shift in the domain of the data set that uncertainty is increasing because the highest uncertainty is achieved in news data set.
+[00:29:28] [Speaker4 (Speaker3?)]: Sure, sure.
+[00:29:34] [Speaker2]: So it's like that's to teacher then deletion and shuffled one and then sorry sorry what I told you is the performance is like that firstly with the teacher then deletion soft max then one ODT. Yeah, for ODT Laplace is better. But yeah, that you told that total uncertainty is increasing with respect to the data sets. I with 1.46 for shuffle and then 1.66 for the news data set. And this is observed in every like student and teacher model both.
+[00:30:50] [Speaker1]: Hmm. Should we discuss anything else today or should we just
+[00:31:07] [Speaker2]: That's all for today.
+[00:31:11] [Speaker1]: And I guess let's continue on Thursday or
+[00:31:20] [Speaker2]: Sure, sir. I will put that into run today.
+[00:31:31] [Speaker1]: Okay, yeah.
+[00:31:37] [Speaker2]: No, that's all from my side today, sir.
+[00:31:40] [Speaker1]: Okay, and thank you then and um
+[00:31:43] [Speaker4 (Speaker3?)]: Um so the duration thing
+[00:31:46] [Speaker2]: Yes, it's working now. Only the issue is we are getting like but total uncertainty is getting directly from the aleatoric not from the like epistemic uncertainty is very less. So that is one of the thing that I have to look into it.
+[00:32:05] [Speaker4 (Speaker3?)]: But I was expecting teacher to have a better
+[00:32:09] [Speaker2]: Teacher is also
+[00:32:14] [Speaker4 (Speaker3?)]: students because of the specific condition distillation and if I was expecting if we consider that noisy version or output distribution during the distillation can improve their epistemic uncertainty. But if teacher itself doesn't have any epistemic uncertainty
+[00:32:33] [Speaker2]: Hmm.
+[00:32:34] [Speaker4 (Speaker3?)]: then yeah. Because teacher is I want so you can play around with how many different samples of adapter it is it is like you consider some multiple samples, right? Adapted samples, right? Dora samples, right?
+[00:32:59] [Speaker2]: Yes, sir.
+[00:33:00] [Speaker4 (Speaker3?)]: How many samples have you considered?
+[00:33:03] [Speaker2]: So are you talking about the partial samples? Yes, sir. On that I have taken eight. eight that I have taken right now.
+[00:33:14] [Speaker4 (Speaker3?)]: Maybe you can try to increase that number okay actually that is improving their specific uncertainty
+[00:33:23] [Speaker2]: Sure.
+[00:33:28] [Speaker4 (Speaker3?)]: More recent really the case that as well as LLMs are concerned this character does not exhibit water distribution that whatever we have is actually not distribution it is just noisy washing but it has seen.
+[00:33:43] [Speaker2]: Hmm. So but what I feel is it should have given a good uncertainty or maybe the ORX score for the dialogue sum because they both are almost similar. Like in the structure wise they both are similar. So it should have and it is already being trained on that similar structure then it is able to clearly able to detect it properly. But yeah, I want to sorry I don't know why it is not performing that much well. Okay, sure. Yeah.
+[00:34:57] [Speaker4 (Speaker3?)]: Sure, sir. I will do the changes that we got today and maybe we can have results by Thursday before meeting. Then we can discuss.
+[00:35:09] [Speaker2]: So Thursday I will not be available.
+[00:35:12] [Speaker4 (Speaker3?)]: Okay. Sure.
+[00:35:15] [Speaker2]: But but if you know the process are available please go ahead with the meeting.
+[00:35:21] [Speaker4 (Speaker3?)]: Yes, we can use them.
+[00:35:22] [Speaker2]: Okay.
+[00:35:23] [Speaker4 (Speaker3?)]: And I will let you know the results after or the feedback.
+[00:35:28] [Speaker2]: Sure, sure.
+[00:35:30] [Speaker4 (Speaker3?)]: Sure. Okay, see you then. Fine.
+[00:35:33] [Speaker2]: Okay, thank you so thank you so much. Bye.
+[00:35:33] [Speaker1]: See you. Bye bye.
